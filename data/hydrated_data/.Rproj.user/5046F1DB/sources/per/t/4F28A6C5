@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591036745069.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1382858082",
+    "id" : "4F28A6C5",
+    "lastKnownWriteTime" : 1591041109,
+    "last_content_update" : 1591041109368,
+    "path" : "~/Desktop/Team-ZeroLoss/data/hydrated_data_ieee/preprocess.R",
+    "project_path" : "../hydrated_data_ieee/preprocess.R",
+    "properties" : {
+        "cursorPosition" : "23,1",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
