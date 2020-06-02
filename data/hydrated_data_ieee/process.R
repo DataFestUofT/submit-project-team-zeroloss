@@ -1,0 +1,10 @@
+library(dplyr)
+library(ggplot2)
+library(foreach)
+library(tidyverse)
+library(data.table)
+library(jsonlite)
+
+setwd("/Users/Raina/desktop/Team-ZeroLoss/data/hydrated_data_ieee")
+tweet_data <- stream_in(file("hydrated_prune"))
+tweet_id <- read_csv("pruned_data.csv")
