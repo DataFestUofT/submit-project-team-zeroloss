@@ -38,13 +38,14 @@ flattened = flattened[, (colnames(flattened) %in% keep_vars_2)]
 location_data = filter(flattened, user.location != "" | !is.na(place.name) | !is.na(place.full_name) |
                          !is.na(place.country) | !is.na(place.country_code) | !is.na(place.place_type))
 
-# keep all tweets that user purports to be in an area inside US
+# keep all tweets that user purports to be within the US
 loc_file = "us_codes.csv"
 us_locs = read.delim(loc_file, header=F, sep="\n")[[1]]
 us_info = sapply(us_locs, grepl, location_data$user.location)
 us_info_single = apply(us_info, 1, any)
 location_data$us_info_single = us_info_single
 
+# keep all tweets whose objective place is within the US
 us_info_2 = sapply(us_locs, grepl, location_data$place.full_name)
 us_info_single_2 = apply(us_info_2, 1, any)
 location_data$us_info_single_2 = us_info_single_2
@@ -58,7 +59,8 @@ time_df = as.data.frame(do.call(rbind, time))
 date = paste(time_df$V2, time_df$V3)
 usa_data$date = date
 
-####### read in the tweet ids and append the sentiment score to our dataframe #######
+
+####### read in the tweet ids and append the sentiment score to our dataframe ########
 tweet_ids <- read.csv("pruned_data.csv", header=T, sep=",", quote = F)
 tweet_ids = tweet_ids[, !(colnames(tweet_ids) %in% c("index"))]
 tweet_ids = format(tweet_ids, scientific=F)
@@ -66,10 +68,7 @@ tweet_ids = format(tweet_ids, scientific=F)
 colnames(usa_data)[2] = "tweet_id"
 final_data = merge(usa_data, tweet_ids, by="tweet_id")
 
-# drop useless variables
-droppings = c("place.place_type", "place.name", "place.full_name", "place.country_code", "place.country" , 
-              "us_info_single",  "us_info_single_2", "withheld_copyright", "truncated", "lang", "created_at")
-final_data = final_data[, !(colnames(final_data) %in% droppings)]
+####### processing the texts ########
 
 # remove urls from text
 final_data$text = gsub(" ?(f|ht)(tp)(s?)(://)(.*)[.|/](.*)","", final_data$text)
@@ -85,6 +84,11 @@ final_data$text = gsub("@\\w+", "[someone]", final_data$text)
 final_data$tweet_id = format(final_data$tweet_id, scientific = F)
 final_data$user.id = format(final_data$user.id, scientific = F)
 final_data[final_data == "NULL"] = NA
+
+# drop useless variables
+droppings = c("place.place_type", "place.name", "place.full_name", "place.country_code", "place.country" , 
+              "us_info_single",  "us_info_single_2", "withheld_copyright", "truncated", "lang", "created_at")
+final_data = final_data[, !(colnames(final_data) %in% droppings)]
 
 fwrite(final_data, file ="cleaned_data.csv")
 
