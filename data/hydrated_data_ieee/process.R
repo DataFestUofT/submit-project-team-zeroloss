@@ -84,6 +84,8 @@ final_data$text = gsub("@\\w+", "[someone]", final_data$text)
 final_data$tweet_id = format(final_data$tweet_id, scientific = F)
 final_data$user.id = format(final_data$user.id, scientific = F)
 final_data[final_data == "NULL"] = NA
+final_data$text = gsub("’", "'", final_data$text)
+final_data = filter(final_data, text != "")
 
 # drop useless variables
 droppings = c("place.place_type", "place.name", "place.full_name", "place.country_code", "place.country" , 
