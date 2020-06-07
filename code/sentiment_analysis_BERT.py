@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import torch
-import unidecode
 import transformers as ppb  # pytorch transformers
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import cross_val_score
@@ -20,12 +19,18 @@ from sklearn.model_selection import GridSearchCV
 #     print(contents[i])
 
 if __name__ == "__main__":
-    # df[0]: id, df[1]: target, df[2]: content
-    df = pd.read_csv(
-        'https://raw.githubusercontent.com/cbaziotis/datastories-semeval2017-task4/master/dataset/Subtask_A'
-        '/downloaded/twitter-2013test-A.tsv',
-        delimiter='\t',
-        header=None)
+    # df[0]: id, df[1]:tweet_id, df[2]: sentiment, df[3]: content
+    df1 = pd.read_csv(
+        '../data/training_data/data1.csv',
+        sep=',')
+    df2 = pd.read_csv(
+        '../data/training_data/data2.csv',
+        sep=',')
+    df3 = pd.read_csv(
+        '../data/training_data/data3.csv',
+        sep=',')
+    df = df1.append(df2, ignore_index=True)
+    df = df.append(df3, ignore_index=True)
 
     # import model
     model_class, tokenizer_class, pretrained_weights = (
@@ -36,7 +41,7 @@ if __name__ == "__main__":
     model = model_class.from_pretrained(pretrained_weights)
 
     # list of sentences
-    tokenized = df[2].apply((lambda x: tokenizer.encode(x, add_special_tokens=True)))
+    tokenized = df['text'].apply((lambda x: tokenizer.encode(x, add_special_tokens=True)))
 
     # pad all lists to the same size as a 2d-array: so BERT can process once not many times
     max_len = 0
