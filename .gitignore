@@ -3,4 +3,5 @@ data/full_dataset_clean/full_dataset_clean.tsv
 data/hydrated_data_ieee/hydrated_prune
 data/hydrated_data_ieee/hydrated_prune_short.json
 data/hydrated_data_ieee/hydrated_prune.zip
+.Rproj.user
 data/hydrated_data_ieee/intermediate_data
