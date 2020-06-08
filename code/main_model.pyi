@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 
 # In[ ]:
@@ -44,15 +44,19 @@ args = {'batch_size': 128,
 
 # In[ ]:
 
+df = pd.read_csv("../data/training_data/data1.csv", sep=",")
 
-df = pd.read_csv(
-    'data1.csv',
-    sep=',')
-train_data = df.iloc[:7500, :]
-valid_data = df.iloc[7500:, :].reset_index()
-test_data = pd.read_csv(
-    'data2.csv',
-    sep=',')
+for i in range(2, 11):
+    if i != 3:
+        filename = "../data/training_data/data" + str(i) + ".csv"
+        df = df.append(pd.read_csv(filename, sep=","))
+import math
+
+train_num = math.ceil(0.7 * len(df))
+valid_num = math.ceil(0.9 * len(df))
+train_data = df.iloc[:train_num, :]
+valid_data = df.iloc[train_num:valid_num, :]
+test_data = df.iloc[valid_num:, :]
 
 
 # In[ ]:
@@ -405,7 +409,7 @@ for epoch in range(args['n_epochs']):
         
     if valid_loss < best_valid_loss:
         best_valid_loss = valid_loss
-        torch.save(model.state_dict(), 'best_model_3.pt')
+        torch.save(model.state_dict(), 'best_model.pt')
     
     print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f} | Train rocauc: {train_rocauc} | Train f1: {train_f1}%')
@@ -415,7 +419,7 @@ for epoch in range(args['n_epochs']):
 # In[ ]:
 
 
-model.load_state_dict(torch.load('best_model_3.pt'))
+model.load_state_dict(torch.load('best_model.pt'))
 
 
 # In[ ]:
@@ -427,21 +431,3 @@ print("Valid loss: {} | Valid Acc: {:.3f} | Valid ROC-AUC: {} | Valid f1: {}".fo
 test_loss, test_acc, test_rocauc, test_f1 = evaluate(model, test_loader, criterion)
 print("Test loss: {} | Test Acc: {:.3f} | Test ROC-AUC: {} | Test f1: {}".format(
     test_loss, test_acc, test_rocauc, test_f1))
-
-
-# In[ ]:
-
-
-a= "COVID fears in Toronto: to me single biggest worry right now is this: the situation is massively worse for the average person now than it was at peak. why? Because at peak it was almost all LTCFs. Now? Unchecked community spread. That's terrifying to me."
-a_encoded = tokenizer.encode(a, add_special_tokens=True)
-a_final = torch.tensor(a_encoded + [0] * (max_len - len(a_encoded))).view(1, -1).to(device)
-softmax = nn.Softmax(dim=1)
-probs = softmax(model(a_final))
-probs
-
-
-# In[ ]:
-
-
-
-
