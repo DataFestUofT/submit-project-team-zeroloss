@@ -12,7 +12,7 @@ Each :white_check_mark: below indicates something that your team must include.
 
 :white_check_mark:  EITHER a slide deck (maximum :three: content slides + title slide in pdf format) **OR** an interactive app / dashboard (do not submit both).  If your team submits an interactive app then it should be deployed somewhere such as (shinyapps.io)[https://www.shinyapps.io/] or (heroku.com)[https://www.heroku.com/] so that you can submit the :link: as a url. (:x: do not submit both a slide-deck **AND** an app).
 
-### Video :video_camera: Write-up :paperclip:
+### Video or Write-up
 
 :white_check_mark:  EITHER a :five: minute video or screencast **OR** a :one:-page write up (single spaced) (:x: do not submit both a video **AND** a write-up).
 
@@ -20,7 +20,7 @@ Each :white_check_mark: below indicates something that your team must include.
 
 :white_check_mark:  The code that you developed to create slide deck/app and video/write-up. 
 
-### Data :1234:
+### Data
 
 :white_check_mark:  :link: to data source(s) or a file containg the data in your repository. 
 
