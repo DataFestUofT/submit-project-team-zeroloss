@@ -1,0 +1,243 @@
+tensor([0.1568, 0.4639, 0.3793])
+113
+58
+59
+The model has 3,942,915 trainable parameters
+rnn.weight_ih_l0
+rnn.weight_hh_l0
+rnn.bias_ih_l0
+rnn.bias_hh_l0
+rnn.weight_ih_l0_reverse
+rnn.weight_hh_l0_reverse
+rnn.bias_ih_l0_reverse
+rnn.bias_hh_l0_reverse
+rnn.weight_ih_l1
+rnn.weight_hh_l1
+rnn.bias_ih_l1
+rnn.bias_hh_l1
+rnn.weight_ih_l1_reverse
+rnn.weight_hh_l1_reverse
+rnn.bias_ih_l1_reverse
+rnn.bias_hh_l1_reverse
+rnn.weight_ih_l2
+rnn.weight_hh_l2
+rnn.bias_ih_l2
+rnn.bias_hh_l2
+rnn.weight_ih_l2_reverse
+rnn.weight_hh_l2_reverse
+rnn.bias_ih_l2_reverse
+rnn.bias_hh_l2_reverse
+out.weight
+out.bias
+Epoch: 01 | Epoch Time: 2m 50s
+	Train Loss: 0.847 | Train Acc: 49.74 | Train rocauc: 0.6586651624253832 | Train f1: 0.3957536891092163%
+	 Val. Loss: 0.801 |  Val. Acc: 51.46 | Val. rocauc: 0.7059746529644305 | Val. f1: 0.4038883835934477%
+Epoch: 02 | Epoch Time: 2m 50s
+	Train Loss: 0.813 | Train Acc: 52.88 | Train rocauc: 0.7128075532152989 | Train f1: 0.44949074124242766%
+	 Val. Loss: 0.811 |  Val. Acc: 52.14 | Val. rocauc: 0.732817477193103 | Val. f1: 0.4118453736922576%
+Epoch: 03 | Epoch Time: 2m 50s
+	Train Loss: 0.781 | Train Acc: 55.95 | Train rocauc: 0.7378781595724445 | Train f1: 0.49360693854960136%
+	 Val. Loss: 0.792 |  Val. Acc: 54.53 | Val. rocauc: 0.7652094246289411 | Val. f1: 0.46263088051609924%
+Epoch: 04 | Epoch Time: 2m 50s
+	Train Loss: 0.758 | Train Acc: 57.75 | Train rocauc: 0.7589161457957321 | Train f1: 0.5163959301979514%
+	 Val. Loss: 0.752 |  Val. Acc: 60.45 | Val. rocauc: 0.7802156550614461 | Val. f1: 0.555824294270215%
+Epoch: 05 | Epoch Time: 2m 50s
+	Train Loss: 0.726 | Train Acc: 59.89 | Train rocauc: 0.7797477210866807 | Train f1: 0.5433406404244757%
+	 Val. Loss: 0.654 |  Val. Acc: 63.76 | Val. rocauc: 0.8076044862448577 | Val. f1: 0.585220856572989%
+Epoch: 06 | Epoch Time: 2m 50s
+	Train Loss: 0.716 | Train Acc: 60.40 | Train rocauc: 0.7857341714396351 | Train f1: 0.551533744622978%
+	 Val. Loss: 0.650 |  Val. Acc: 64.48 | Val. rocauc: 0.8150202367956005 | Val. f1: 0.5974365452785929%
+Epoch: 07 | Epoch Time: 2m 50s
+	Train Loss: 0.696 | Train Acc: 62.07 | Train rocauc: 0.7965803603316789 | Train f1: 0.5714640801783767%
+	 Val. Loss: 0.644 |  Val. Acc: 65.19 | Val. rocauc: 0.8260906040453737 | Val. f1: 0.6123194134039133%
+Epoch: 08 | Epoch Time: 2m 50s
+	Train Loss: 0.685 | Train Acc: 62.18 | Train rocauc: 0.8043295129841178 | Train f1: 0.5735689633153774%
+	 Val. Loss: 0.641 |  Val. Acc: 65.07 | Val. rocauc: 0.8261725517250768 | Val. f1: 0.6074664309354014%
+Epoch: 09 | Epoch Time: 2m 50s
+	Train Loss: 0.675 | Train Acc: 62.90 | Train rocauc: 0.8129481301671153 | Train f1: 0.5864496424974356%
+	 Val. Loss: 0.652 |  Val. Acc: 64.69 | Val. rocauc: 0.827283572348284 | Val. f1: 0.6040775796212485%
+Epoch: 10 | Epoch Time: 2m 50s
+	Train Loss: 0.671 | Train Acc: 63.41 | Train rocauc: 0.8158228746329871 | Train f1: 0.5915309256915434%
+	 Val. Loss: 0.651 |  Val. Acc: 67.32 | Val. rocauc: 0.8379650970761328 | Val. f1: 0.6561282665460986%
+Epoch: 11 | Epoch Time: 2m 50s
+	Train Loss: 0.664 | Train Acc: 63.78 | Train rocauc: 0.8213459229131607 | Train f1: 0.5998445213203556%
+	 Val. Loss: 0.623 |  Val. Acc: 64.72 | Val. rocauc: 0.8380830396597341 | Val. f1: 0.5943600398875368%
+Epoch: 12 | Epoch Time: 2m 50s
+	Train Loss: 0.652 | Train Acc: 64.35 | Train rocauc: 0.826564301837427 | Train f1: 0.6079727012570147%
+	 Val. Loss: 0.627 |  Val. Acc: 66.00 | Val. rocauc: 0.8380224490597009 | Val. f1: 0.6164438122463799%
+Epoch: 13 | Epoch Time: 2m 50s
+	Train Loss: 0.650 | Train Acc: 64.55 | Train rocauc: 0.8292565144325452 | Train f1: 0.6104868975676738%
+	 Val. Loss: 0.618 |  Val. Acc: 66.24 | Val. rocauc: 0.8421544527258504 | Val. f1: 0.6277136145057924%
+Epoch: 14 | Epoch Time: 2m 50s
+	Train Loss: 0.649 | Train Acc: 64.63 | Train rocauc: 0.8286067575971805 | Train f1: 0.6106197468900951%
+	 Val. Loss: 0.619 |  Val. Acc: 66.86 | Val. rocauc: 0.8455538030442666 | Val. f1: 0.6438288727333791%
+Epoch: 15 | Epoch Time: 2m 50s
+	Train Loss: 0.638 | Train Acc: 65.57 | Train rocauc: 0.836119642565579 | Train f1: 0.6231049685331153%
+	 Val. Loss: 0.646 |  Val. Acc: 66.55 | Val. rocauc: 0.8509710565528839 | Val. f1: 0.6438151697902142%
+Epoch: 16 | Epoch Time: 2m 50s
+	Train Loss: 0.639 | Train Acc: 65.31 | Train rocauc: 0.8369043821870091 | Train f1: 0.6203395758654572%
+	 Val. Loss: 0.616 |  Val. Acc: 66.79 | Val. rocauc: 0.8437547094266298 | Val. f1: 0.6356393942493107%
+Epoch: 17 | Epoch Time: 2m 50s
+	Train Loss: 0.640 | Train Acc: 65.25 | Train rocauc: 0.8347106175997976 | Train f1: 0.6187595349106016%
+	 Val. Loss: 0.616 |  Val. Acc: 66.53 | Val. rocauc: 0.84994672646226 | Val. f1: 0.6393023947104994%
+Epoch: 18 | Epoch Time: 2m 50s
+	Train Loss: 0.632 | Train Acc: 65.52 | Train rocauc: 0.8393834804333143 | Train f1: 0.6232586356638935%
+	 Val. Loss: 0.604 |  Val. Acc: 67.62 | Val. rocauc: 0.8513571490122013 | Val. f1: 0.6531327382548883%
+Epoch: 19 | Epoch Time: 2m 50s
+	Train Loss: 0.629 | Train Acc: 65.82 | Train rocauc: 0.8405682891643528 | Train f1: 0.6268251829732273%
+	 Val. Loss: 0.602 |  Val. Acc: 68.26 | Val. rocauc: 0.8510002702864745 | Val. f1: 0.6668790828116686%
+Epoch: 20 | Epoch Time: 2m 50s
+	Train Loss: 0.627 | Train Acc: 65.75 | Train rocauc: 0.8421761466016496 | Train f1: 0.627689087561671%
+	 Val. Loss: 0.604 |  Val. Acc: 66.03 | Val. rocauc: 0.8482619324793872 | Val. f1: 0.6211038825714905%
+Epoch: 21 | Epoch Time: 2m 50s
+	Train Loss: 0.618 | Train Acc: 66.56 | Train rocauc: 0.8437599979000195 | Train f1: 0.6349706534097782%
+	 Val. Loss: 0.593 |  Val. Acc: 68.77 | Val. rocauc: 0.8558552398456295 | Val. f1: 0.6686294048387534%
+Epoch: 22 | Epoch Time: 2m 50s
+	Train Loss: 0.613 | Train Acc: 66.63 | Train rocauc: 0.8469386272176886 | Train f1: 0.6381341447381716%
+	 Val. Loss: 0.602 |  Val. Acc: 69.25 | Val. rocauc: 0.8573955345221855 | Val. f1: 0.6817822661054883%
+Epoch: 23 | Epoch Time: 2m 50s
+	Train Loss: 0.612 | Train Acc: 67.14 | Train rocauc: 0.8472732031640753 | Train f1: 0.6437376375481497%
+	 Val. Loss: 0.599 |  Val. Acc: 69.97 | Val. rocauc: 0.8596524357812219 | Val. f1: 0.6933690007551007%
+Epoch: 24 | Epoch Time: 2m 50s
+	Train Loss: 0.608 | Train Acc: 67.10 | Train rocauc: 0.850414814331131 | Train f1: 0.6431015443529037%
+	 Val. Loss: 0.604 |  Val. Acc: 68.90 | Val. rocauc: 0.855488529079175 | Val. f1: 0.6748490450675714%
+Epoch: 25 | Epoch Time: 2m 50s
+	Train Loss: 0.609 | Train Acc: 66.96 | Train rocauc: 0.8499195645342218 | Train f1: 0.6417266360114786%
+	 Val. Loss: 0.621 |  Val. Acc: 69.71 | Val. rocauc: 0.8578289783517218 | Val. f1: 0.6938260824040606%
+Epoch: 26 | Epoch Time: 2m 50s
+	Train Loss: 0.607 | Train Acc: 67.08 | Train rocauc: 0.8509438496139137 | Train f1: 0.6440012608458341%
+	 Val. Loss: 0.607 |  Val. Acc: 69.66 | Val. rocauc: 0.8573541923316471 | Val. f1: 0.6921675774848366%
+Epoch: 27 | Epoch Time: 2m 50s
+	Train Loss: 0.599 | Train Acc: 67.62 | Train rocauc: 0.8543982722861397 | Train f1: 0.6507286951001698%
+	 Val. Loss: 0.595 |  Val. Acc: 69.84 | Val. rocauc: 0.8599839322827486 | Val. f1: 0.6881426345870344%
+Epoch: 28 | Epoch Time: 2m 50s
+	Train Loss: 0.597 | Train Acc: 67.91 | Train rocauc: 0.8543141736800274 | Train f1: 0.6531249970793547%
+	 Val. Loss: 0.607 |  Val. Acc: 68.46 | Val. rocauc: 0.8557132331072541 | Val. f1: 0.6629918969813673%
+Epoch: 29 | Epoch Time: 2m 50s
+	Train Loss: 0.597 | Train Acc: 67.89 | Train rocauc: 0.856065377719202 | Train f1: 0.6529683989524886%
+	 Val. Loss: 0.592 |  Val. Acc: 68.59 | Val. rocauc: 0.8553427939591385 | Val. f1: 0.6681014463588543%
+Epoch: 30 | Epoch Time: 2m 50s
+	Train Loss: 0.595 | Train Acc: 68.14 | Train rocauc: 0.8580178557615159 | Train f1: 0.656972920028564%
+	 Val. Loss: 0.611 |  Val. Acc: 69.17 | Val. rocauc: 0.8572596497678536 | Val. f1: 0.6784984816054086%
+Epoch: 31 | Epoch Time: 2m 50s
+	Train Loss: 0.597 | Train Acc: 67.87 | Train rocauc: 0.8562305075426228 | Train f1: 0.6535719251434584%
+	 Val. Loss: 0.593 |  Val. Acc: 69.86 | Val. rocauc: 0.8601627592630859 | Val. f1: 0.6872989602677166%
+Epoch: 32 | Epoch Time: 2m 50s
+	Train Loss: 0.594 | Train Acc: 68.30 | Train rocauc: 0.8567520972076845 | Train f1: 0.6578478092659176%
+	 Val. Loss: 0.600 |  Val. Acc: 69.62 | Val. rocauc: 0.8603711061367612 | Val. f1: 0.686295072104605%
+Epoch: 33 | Epoch Time: 2m 50s
+	Train Loss: 0.589 | Train Acc: 68.40 | Train rocauc: 0.8606475532078766 | Train f1: 0.6594095261161574%
+	 Val. Loss: 0.589 |  Val. Acc: 69.66 | Val. rocauc: 0.8609145803683835 | Val. f1: 0.6823803072445108%
+Epoch: 34 | Epoch Time: 2m 50s
+	Train Loss: 0.588 | Train Acc: 68.55 | Train rocauc: 0.8604102904644875 | Train f1: 0.661491141669961%
+	 Val. Loss: 0.591 |  Val. Acc: 68.30 | Val. rocauc: 0.8585021131569763 | Val. f1: 0.6577467125894966%
+Epoch: 35 | Epoch Time: 2m 50s
+	Train Loss: 0.590 | Train Acc: 68.24 | Train rocauc: 0.8613834853507302 | Train f1: 0.6584829263606247%
+	 Val. Loss: 0.601 |  Val. Acc: 69.67 | Val. rocauc: 0.8597763826057112 | Val. f1: 0.685863788185128%
+Epoch: 36 | Epoch Time: 2m 50s
+	Train Loss: 0.585 | Train Acc: 68.66 | Train rocauc: 0.8630005274138746 | Train f1: 0.6629830223523542%
+	 Val. Loss: 0.596 |  Val. Acc: 69.38 | Val. rocauc: 0.8568957741886527 | Val. f1: 0.6805249181539983%
+Epoch: 37 | Epoch Time: 2m 50s
+	Train Loss: 0.582 | Train Acc: 68.54 | Train rocauc: 0.8629837115569269 | Train f1: 0.6611643261270913%
+	 Val. Loss: 0.585 |  Val. Acc: 68.22 | Val. rocauc: 0.8570937010252566 | Val. f1: 0.6571513687727482%
+Epoch: 38 | Epoch Time: 2m 50s
+	Train Loss: 0.583 | Train Acc: 68.58 | Train rocauc: 0.8630066144759654 | Train f1: 0.6615449053714535%
+	 Val. Loss: 0.587 |  Val. Acc: 68.82 | Val. rocauc: 0.8560762110029281 | Val. f1: 0.6674630637972568%
+Epoch: 39 | Epoch Time: 2m 50s
+	Train Loss: 0.578 | Train Acc: 69.00 | Train rocauc: 0.8650884731702012 | Train f1: 0.6666558394537617%
+	 Val. Loss: 0.597 |  Val. Acc: 69.79 | Val. rocauc: 0.8618080106616688 | Val. f1: 0.686042526198606%
+Epoch: 40 | Epoch Time: 2m 50s
+	Train Loss: 0.576 | Train Acc: 68.99 | Train rocauc: 0.8663819118642705 | Train f1: 0.6662114207917634%
+	 Val. Loss: 0.599 |  Val. Acc: 70.32 | Val. rocauc: 0.8634329448979747 | Val. f1: 0.6968312226907338%
+Epoch: 41 | Epoch Time: 2m 50s
+	Train Loss: 0.568 | Train Acc: 69.49 | Train rocauc: 0.8707478633979203 | Train f1: 0.6724534653233469%
+	 Val. Loss: 0.594 |  Val. Acc: 68.50 | Val. rocauc: 0.8575552333607152 | Val. f1: 0.6609049960289033%
+Epoch: 42 | Epoch Time: 2m 50s
+	Train Loss: 0.566 | Train Acc: 69.52 | Train rocauc: 0.8703455776494641 | Train f1: 0.6727439415246117%
+	 Val. Loss: 0.584 |  Val. Acc: 70.15 | Val. rocauc: 0.8616641108902138 | Val. f1: 0.6916939798502137%
+Epoch: 43 | Epoch Time: 2m 50s
+	Train Loss: 0.563 | Train Acc: 69.68 | Train rocauc: 0.8715622356661766 | Train f1: 0.6750005742532524%
+	 Val. Loss: 0.590 |  Val. Acc: 68.69 | Val. rocauc: 0.8601914658759322 | Val. f1: 0.6627171815562835%
+Epoch: 44 | Epoch Time: 2m 50s
+	Train Loss: 0.558 | Train Acc: 70.23 | Train rocauc: 0.8732598496916831 | Train f1: 0.6819077778242454%
+	 Val. Loss: 0.585 |  Val. Acc: 69.44 | Val. rocauc: 0.8593611030157294 | Val. f1: 0.6781356816408939%
+Epoch: 45 | Epoch Time: 2m 50s
+	Train Loss: 0.560 | Train Acc: 70.07 | Train rocauc: 0.8735251912358091 | Train f1: 0.6806948964737704%
+	 Val. Loss: 0.584 |  Val. Acc: 70.17 | Val. rocauc: 0.8643781881056062 | Val. f1: 0.6901184170678745%
+Epoch: 46 | Epoch Time: 2m 50s
+	Train Loss: 0.555 | Train Acc: 70.45 | Train rocauc: 0.8751384169253477 | Train f1: 0.6843610274153935%
+	 Val. Loss: 0.589 |  Val. Acc: 70.10 | Val. rocauc: 0.8622513255395001 | Val. f1: 0.6904653911778839%
+Epoch: 47 | Epoch Time: 2m 50s
+	Train Loss: 0.553 | Train Acc: 70.57 | Train rocauc: 0.8756067341451087 | Train f1: 0.6842893572658497%
+	 Val. Loss: 0.593 |  Val. Acc: 69.08 | Val. rocauc: 0.8590968978663817 | Val. f1: 0.6711659325687722%
+Epoch: 48 | Epoch Time: 2m 50s
+	Train Loss: 0.552 | Train Acc: 70.59 | Train rocauc: 0.8776178911457988 | Train f1: 0.685735931406138%
+	 Val. Loss: 0.599 |  Val. Acc: 69.86 | Val. rocauc: 0.861902254068487 | Val. f1: 0.6877731746302839%
+Epoch: 49 | Epoch Time: 2m 50s
+	Train Loss: 0.553 | Train Acc: 70.45 | Train rocauc: 0.8764016933413111 | Train f1: 0.6846003125898174%
+	 Val. Loss: 0.599 |  Val. Acc: 69.97 | Val. rocauc: 0.8605543881480139 | Val. f1: 0.6904121622555828%
+Epoch: 50 | Epoch Time: 2m 50s
+	Train Loss: 0.550 | Train Acc: 70.75 | Train rocauc: 0.8777093761029177 | Train f1: 0.6865334665661625%
+	 Val. Loss: 0.608 |  Val. Acc: 68.37 | Val. rocauc: 0.8580108281107703 | Val. f1: 0.6604011926550073%
+Epoch: 51 | Epoch Time: 2m 50s
+	Train Loss: 0.544 | Train Acc: 71.09 | Train rocauc: 0.8799975719678691 | Train f1: 0.6906520020461484%
+	 Val. Loss: 0.591 |  Val. Acc: 69.55 | Val. rocauc: 0.8601983549611606 | Val. f1: 0.6805097049026407%
+Epoch: 52 | Epoch Time: 2m 50s
+	Train Loss: 0.546 | Train Acc: 71.03 | Train rocauc: 0.8806325552376381 | Train f1: 0.6914559163206719%
+	 Val. Loss: 0.616 |  Val. Acc: 68.44 | Val. rocauc: 0.8557227113504129 | Val. f1: 0.6628141606636679%
+Epoch: 53 | Epoch Time: 2m 50s
+	Train Loss: 0.544 | Train Acc: 71.06 | Train rocauc: 0.8808999742084225 | Train f1: 0.6914787168207037%
+	 Val. Loss: 0.616 |  Val. Acc: 69.81 | Val. rocauc: 0.8590618741233406 | Val. f1: 0.687000261957813%
+Epoch: 54 | Epoch Time: 2m 50s
+	Train Loss: 0.541 | Train Acc: 71.39 | Train rocauc: 0.8805738028079295 | Train f1: 0.69411392190477%
+	 Val. Loss: 0.641 |  Val. Acc: 69.57 | Val. rocauc: 0.8588438484718935 | Val. f1: 0.6908257750690915%
+Epoch: 55 | Epoch Time: 2m 50s
+	Train Loss: 0.540 | Train Acc: 71.39 | Train rocauc: 0.8830950619372937 | Train f1: 0.6944162435288361%
+	 Val. Loss: 0.613 |  Val. Acc: 70.06 | Val. rocauc: 0.8596502619155351 | Val. f1: 0.6962131829829878%
+Epoch: 56 | Epoch Time: 2m 50s
+	Train Loss: 0.536 | Train Acc: 71.70 | Train rocauc: 0.8828219866614653 | Train f1: 0.6981337771364902%
+	 Val. Loss: 0.601 |  Val. Acc: 69.59 | Val. rocauc: 0.8584211528144741 | Val. f1: 0.6835741982945228%
+Epoch: 57 | Epoch Time: 2m 50s
+	Train Loss: 0.533 | Train Acc: 71.67 | Train rocauc: 0.8849964276923439 | Train f1: 0.6968238671622392%
+	 Val. Loss: 0.613 |  Val. Acc: 69.15 | Val. rocauc: 0.8567892095434019 | Val. f1: 0.6794329135522286%
+Epoch: 58 | Epoch Time: 2m 50s
+	Train Loss: 0.531 | Train Acc: 71.70 | Train rocauc: 0.8859566349349867 | Train f1: 0.6979910091406996%
+	 Val. Loss: 0.607 |  Val. Acc: 69.03 | Val. rocauc: 0.8555121561255065 | Val. f1: 0.6725292038041368%
+Epoch: 59 | Epoch Time: 2m 50s
+	Train Loss: 0.529 | Train Acc: 71.85 | Train rocauc: 0.8870065907910447 | Train f1: 0.6989318922167688%
+	 Val. Loss: 0.610 |  Val. Acc: 69.04 | Val. rocauc: 0.854797890577084 | Val. f1: 0.6744358761401856%
+Epoch: 60 | Epoch Time: 2m 50s
+	Train Loss: 0.527 | Train Acc: 72.22 | Train rocauc: 0.8876214882974348 | Train f1: 0.7026331308921503%
+	 Val. Loss: 0.611 |  Val. Acc: 69.21 | Val. rocauc: 0.8540406871309005 | Val. f1: 0.6798501899842314%
+Epoch: 61 | Epoch Time: 2m 50s
+	Train Loss: 0.519 | Train Acc: 72.54 | Train rocauc: 0.8913713810231484 | Train f1: 0.707442431109802%
+	 Val. Loss: 0.649 |  Val. Acc: 68.10 | Val. rocauc: 0.852455553773033 | Val. f1: 0.6641022394310858%
+Epoch: 62 | Epoch Time: 2m 50s
+	Train Loss: 0.527 | Train Acc: 72.24 | Train rocauc: 0.8887110132474727 | Train f1: 0.7040403313274929%
+	 Val. Loss: 0.616 |  Val. Acc: 68.84 | Val. rocauc: 0.8556941442716317 | Val. f1: 0.6743624693006814%
+Epoch: 63 | Epoch Time: 2m 50s
+	Train Loss: 0.519 | Train Acc: 72.70 | Train rocauc: 0.8902080574295848 | Train f1: 0.7090660131174573%
+	 Val. Loss: 0.636 |  Val. Acc: 68.86 | Val. rocauc: 0.8579340169473875 | Val. f1: 0.6740040013703613%
+Epoch: 64 | Epoch Time: 2m 50s
+	Train Loss: 0.515 | Train Acc: 72.69 | Train rocauc: 0.8930889723140818 | Train f1: 0.7075548057283064%
+	 Val. Loss: 0.623 |  Val. Acc: 70.24 | Val. rocauc: 0.8575125283491962 | Val. f1: 0.696275834900034%
+Epoch: 65 | Epoch Time: 2m 50s
+	Train Loss: 0.512 | Train Acc: 72.90 | Train rocauc: 0.89496493124161 | Train f1: 0.7109576168436078%
+	 Val. Loss: 0.628 |  Val. Acc: 69.87 | Val. rocauc: 0.8584077514059498 | Val. f1: 0.6881018562305137%
+Epoch: 66 | Epoch Time: 2m 50s
+	Train Loss: 0.507 | Train Acc: 73.20 | Train rocauc: 0.8938599142835059 | Train f1: 0.7144773779233897%
+	 Val. Loss: 0.615 |  Val. Acc: 69.55 | Val. rocauc: 0.8576481387215474 | Val. f1: 0.6794325233827834%
+Epoch: 67 | Epoch Time: 2m 50s
+	Train Loss: 0.510 | Train Acc: 73.12 | Train rocauc: 0.8953574498065201 | Train f1: 0.71381806711888%
+	 Val. Loss: 0.665 |  Val. Acc: 68.98 | Val. rocauc: 0.8534508506203032 | Val. f1: 0.6772001432066235%
+Epoch: 68 | Epoch Time: 2m 50s
+	Train Loss: 0.504 | Train Acc: 73.49 | Train rocauc: 0.896781581309521 | Train f1: 0.7179647327383262%
+	 Val. Loss: 0.647 |  Val. Acc: 69.67 | Val. rocauc: 0.8552630119357358 | Val. f1: 0.6876057554823791%
+Epoch: 69 | Epoch Time: 2m 50s
+	Train Loss: 0.504 | Train Acc: 73.42 | Train rocauc: 0.8962906188245885 | Train f1: 0.7166358933733912%
+	 Val. Loss: 0.657 |  Val. Acc: 68.64 | Val. rocauc: 0.8499379085704024 | Val. f1: 0.675585371570629%
+Epoch: 70 | Epoch Time: 2m 50s
+	Train Loss: 0.500 | Train Acc: 73.82 | Train rocauc: 0.8972012376552122 | Train f1: 0.7196875683778597%
+	 Val. Loss: 0.649 |  Val. Acc: 69.57 | Val. rocauc: 0.8575493516995963 | Val. f1: 0.6872864678082012%
+Valid loss: 0.5846029189617737 | Valid Acc: 0.702 | Valid ROC-AUC: 0.8636620979099431 | Valid f1: 0.6911336728459839
+Test loss: 0.589052551034568 | Test Acc: 0.697 | Test ROC-AUC: 0.8645667596573683 | Test f1: 0.6871606546846803
