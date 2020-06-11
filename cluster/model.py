@@ -23,16 +23,16 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-bs', '--batchsize', action='store', default=128,
                     dest="bs", type=int, help="The batch size to use")
 
-parser.add_argument('-lr', '--learningrate', action="store", default=7e-3,
+parser.add_argument('-lr', '--learningrate', action="store", default=1e-2,
                     dest="lr", type=float, help="The learning rate")
 
-parser.add_argument('-hd', '--hiddendim', action="store", default=128,
+parser.add_argument('-hd', '--hiddendim', action="store", default=256,
                     dest="hd", type=int, help="The hidden layer dimensionality")
 
-parser.add_argument('-nl', '--nlayers', action="store", default=3,
-                    dest="nl", type=int, help="The number of layers to use for NN")
+parser.add_argument('-nl', '--nlayers', action="store", default=2,
+                    dest="nl", type=int, help="The number of layers to use for LSTM")
 
-parser.add_argument('-do', '--dropout', action="store", default=0.25,
+parser.add_argument('-do', '--dropout', action="store", default=0.,
                     dest="do", type=float, help="The probability of dropout")
 
 parser.add_argument('-ne', '--nepochs', action="store", default=70,
@@ -47,7 +47,7 @@ parser.add_argument('-b2', '--beta2', action="store", default=0.999,
 parser.add_argument('-wd', '--weightdecay', action="store", default=0.01,
                     dest="wd", type=float, help="weight decay factor for adam")
 
-parser.add_argument('-sn', '--save-name', action="store", dest="save_name", 
+parser.add_argument('-sn', '--save-name', action="store", dest="save_name", default="model_name",
                     help="name for saving model and graph")
 
 cmd_args = parser.parse_args()
@@ -68,7 +68,7 @@ args = {
 }
 
 
-SEED = 42
+SEED = 921921
 
 random.seed(SEED)
 np.random.seed(SEED)
@@ -257,9 +257,13 @@ class BERTGRUSentiment(nn.Module):
                           bidirectional = bidirectional,
                           batch_first = True,
                           dropout = 0 if n_layers < 2 else dropout)
-        
-        self.out = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, output_dim)
-        
+
+        self.linear1 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim,
+                                 hidden_dim * 2 if bidirectional else hidden_dim)
+        nn.init.kaiming_normal_(self.linear1.weight, nonlinearity="relu")
+        self.relu = nn.ReLU()
+        self.linear2 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, output_dim)
+        nn.init.xavier_normal_(self.linear2.weight)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, text):
@@ -283,7 +287,7 @@ class BERTGRUSentiment(nn.Module):
                 
         #hidden = [batch size, hid dim]
         
-        output = self.out(hidden)
+        output = self.linear2(self.relu(self.linear1(hidden)))
         
         #output = [batch size, out dim]
         
@@ -316,10 +320,10 @@ class BERTLSTMSentiment(nn.Module):
 
         self.linear1 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, 
                                  hidden_dim * 2 if bidirectional else hidden_dim)
-        nn.init.xavier_uniform(self.linear1.weight)
-        self.tanh = nn.Tanh()
+        nn.init.kaiming_normal_(self.linear1.weight, nonlinearity="relu")
+        self.relu = nn.ReLU()
         self.linear2 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, output_dim)
-        nn.init.xavier_uniform(self.linear2.weight)
+        nn.init.xavier_normal_(self.linear2.weight)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, text):
@@ -343,7 +347,7 @@ class BERTLSTMSentiment(nn.Module):
                 
         #hidden = [batch size, hid dim]
         
-        output = self.linear2(self.tanh(self.linear1(hidden)))
+        output = self.linear2(self.relu(self.linear1(hidden)))
         
         #output = [batch size, out dim]
         
@@ -414,7 +418,7 @@ optimizer = optim.AdamW(model.parameters(),
 
 # optimizer = optim.SGD(model.parameters(), momentum=0.9, lr=args["lr"])
 
-scheduler = MultiStepLR(optimizer, milestones=[20, 40], gamma=args["lr_decay"])
+scheduler = MultiStepLR(optimizer, milestones=[10, 30], gamma=args["lr_decay"])
 
 criterion = nn.CrossEntropyLoss(weight=args['weight']).to(device)
 
