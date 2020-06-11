@@ -316,9 +316,10 @@ class BERTLSTMSentiment(nn.Module):
 
         self.linear1 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, 
                                  hidden_dim * 2 if bidirectional else hidden_dim)
+        nn.init.xavier_uniform(self.linear1.weight)
         self.tanh = nn.Tanh()
         self.linear2 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, output_dim)
-        
+        nn.init.xavier_uniform(self.linear2.weight)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, text):
@@ -342,7 +343,7 @@ class BERTLSTMSentiment(nn.Module):
                 
         #hidden = [batch size, hid dim]
         
-        output = self.tanh(self.linear2(self.tanh(self.linear1(hidden))))
+        output = self.linear2(self.tanh(self.linear1(hidden)))
         
         #output = [batch size, out dim]
         
