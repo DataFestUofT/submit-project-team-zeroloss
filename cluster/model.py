@@ -313,8 +313,11 @@ class BERTLSTMSentiment(nn.Module):
                            bidirectional = bidirectional,
                            batch_first = True,
                            dropout = 0 if n_layers < 2 else dropout)
-        
-        self.out = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, output_dim)
+
+        self.linear1 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, 
+                                 hidden_dim * 2 if bidirectional else hidden_dim)
+        self.tanh = nn.Tanh()
+        self.linear2 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -339,7 +342,7 @@ class BERTLSTMSentiment(nn.Module):
                 
         #hidden = [batch size, hid dim]
         
-        output = self.out(hidden)
+        output = self.tanh(self.linear2(self.tanh(self.linear1(hidden))))
         
         #output = [batch size, out dim]
         
