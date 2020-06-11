@@ -76,19 +76,22 @@
                         <li><a href="#line1">Introduction</a></li>
                         <li><a href="#line2">Data and Preprocessing</a>
                             <ul class="nav">
-                                <li><a href="#line2_1">Data Exploration</a></li>
+                                <li><a href="#line2_1">Datasets</a></li>
                                 <li><a href="#line2_2">Preprocessing</a></li>
+                                <li><a href="#line2_3">Text Processing</a></li>
                             </ul>
                         </li>
                         <li><a href="#line3">Model</a>
                             <ul class="nav">
-                                <li><a href="#line3_1">RoBERTa</a></li>
-                                <li><a href="#line3_2">Fine-tune</a></li>
+                                <li><a href="#line3_1">the RoBERTa Model</a></li>
+                                <li><a href="#line3_2">Fine-tuning RoBERTa</a></li>
+                                <li><a href="#line3_2">Performance</a></li>
                             </ul>
                         </li>
-                        <li><a href="#line4">Data Analysis with the Model</a></li>
-                        <li><a href="#line5">Conclusion</a></li>
-                        <li><a href="#line6">Data Source</a></li>
+                        <li><a href="#line4">Data Exploration</a></li>
+                        <li><a href="#line5">Data Analysis with the Model</a></li>
+                        <li><a href="#line6">References</a></li>
+                        <li><a href="#line7">Authors</a></li>
                     </ul>
                 </nav >
             </div>
@@ -98,7 +101,7 @@
 
                     <div class="row">
                         <div class="col-md-12 left-align">
-                            <h2 class="dark-text">Introduction <a href="#top">#back to top</a></h2>
+                            <h2 class="dark-text">Introduction <a ></a></h2>
                         </div>
                         <!-- end col -->
                     </div>
@@ -106,8 +109,10 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="barContent">Coronavirus disease 2019 (COVID-19), caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), grew rapidly in scale and severity, and was officially declared as a pandemic on March 11th, 2020. In the United States, the country with the highest confirmed cases, the government has announced a number of policies, including shutting down schools and workplaces, promoting social distancing, advising people to wear masks in public areas, etc. The U.S. president Donald Trump also broadcasts his opinions towards the pandemic, whose words might have an impact on the public's attitude.
-                                In this study, applying the state-of-art natural language processing model, we attempt to analyze how the overall sentiment of COVID-19 related tweets changes with important policy decisions or the influential words by politicians.
+                            <p class="barContent">Coronavirus disease 2019 (COVID-19), caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), grew rapidly in scale and severity, and was officially declared as a pandemic on March 11th, 2020. In the United States, the country with the highest confirmed cases, the government has announced a number of policies, including shutting down schools and workplaces, promoting social distancing, advising people to wear masks in public areas, etc. The U.S. president Donald Trump also broadcasts his opinions towards the pandemic, whose words might have an impact on the public's attitude. <br>
+
+                                In this study, applying the state-of-art natural language processing model, we attempt to analyze how the overall sentiment of COVID-19 related tweets changes with important policy decisions or influential words by politicians.
+                                
                             </p>
                             <!--                                <pre class="brush: html; highlight: [2,4]">-->
                             <!--                            <div class="container">-->
@@ -163,7 +168,7 @@
 
                     <div class="row">
                         <div class="col-md-12 left-align">
-                            <h2 class="dark-text">Data and Preprocessing <a href="#top">#back to top</a></h2>
+                            <h2 class="dark-text">Data and Preprocessing <a></a></h2>
                         </div>
                         <!-- end col -->
                     </div>
@@ -171,19 +176,15 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h4 id="line2_1">Data Exploration</h4>
-                            <p class="barContent">There are two data sources that we utilized in this project. We used <a href="https://github.com/cbaziotis/datastories-semeval2017-task4">SemEval-2017 Task 4A dataset</a> to train and evaluate our model. After the model is trained, we feed our processed selection of <a href="https://github.com/thepanacealab/covid19_twitter#version-120-release-notes">COVID-19 Twitter dataset (Release 12.0)</a> into the model to get the sentiment predictions.
-                            </p>
-                            <img src="./images/data/create_time.png" style="height:200px; padding-bottom: 3px">
-                            <img src="./images/data/retweet.png" style="height:200px; padding-bottom: 3px">
-                            <img src="./images/data/followers.png" style="height:202px;">
-                            <img src="./images/data/default_users.png" style="height:202px; width: 250.5px">
+                            <h4 id="line2_1">Datasets</h4>
+                            <p class="barContent">There are two data sources that we utilized in this project. We do analysis with our model using the processed selection of  COVID-19 Twitter dataset (Release 12.0). To train and evaluate our model, we used SemEval-2017 Task 4A dataset. 
                         </div>
                         <div class="col-md-12">
                             <h4 id="line2_2">Preprocessing</h4>
                             <p class="barContent">
-                                The raw data from COVID-19 Twitter dataset (Release 12.0) contains a total of 331M tweet ID entries. As shown in Figure, we first randomly sampled 10,000 tweet IDs for each day from March 19th to May 30th (74 continuous days). By querying the twitter server, we hydrated the selected tweet ids to get the text and user information associated. (“Hydrate a tweet ID” simply means to get the tweet text and user information for the tweet specified by the tweet ID). We then filtered out all tweets from users whose location information implies they are in/from the states.
+                                The raw data from COVID-19 Twitter dataset (Release 12.0) contains a total of 331M tweet ID entries. As shown in Figure, we first randomly sampled 10,000 tweet IDs for each day from March 19th to May 30th (74 continuous days). By querying the twitter server, we hydrated the selected tweet ids to get the text and user information associated. (“Hydrate a tweet ID” simply means to get the tweet text and user information for the tweet specified by the tweet ID). We then filtered out all tweets from users whose location information implies they are in the states.
                             </p>
+                            <h4 id="line2_3">Text Processing</h4>
                             <p class="barContent">
                                 For the purpose of boosting our model’s performance, we preprocessed the tweet texts in the two datasets using a pipeline as shown in Figure. To be more specific, we first convert emoji to text, expand common ASCII and abbreviated text emoticons into human-readable  text. The second step is to remove URLs present, replace “@[username]” with just “someone”, and expand hashtags (e.g. “#ATwitterHashtag” into “a twitter hashtag”). In the third step, we use WordNet to lemmatize the tweet text, changing words in different parts of speech and plural forms into one common canonical form. These three steps aim to make sure our <u>BERT/RoBERTa</u> based embedding can comprehend as much useful information as possible.
                             </p>
@@ -199,7 +200,7 @@
 
                     <div class="row">
                         <div class="col-md-12 left-align">
-                            <h2 class="dark-text">Model<a href="#top">#back to top</a></h2>
+                            <h2 class="dark-text">Model<a></a></h2>
                         </div>
                         <!-- end col -->
                     </div>
@@ -207,7 +208,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h4 id="line3_1">RoBERTa</h4>
+                            <h4 id="line3_1">the RoBERTa Model</h4>
                             <p class="barContent">The <a href="https://arxiv.org/abs/1907.11692">RoBERTa (Robustly Optimized BERT Pretraining)</a> model was proposed by Yinhan Liu et al in 2018. It builds on BERT (Bidirectional Encoder Representations from Transformers), which is a language representation model designed to pre-train deep bidirectional representations from unlabeled text. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks. A video introduction of BERT can be found below.
                             </p>
                             <div class="row">
@@ -219,14 +220,10 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <h4 id="line3_2">Fine-tune</h4>
+                            <h4 id="line3_2">Fine-tuning RoBERTa</h4>
 
                             <p class="barContent">
-                                In our sentiment analysis task, we utilize the transformers library by <a href="https://huggingface.co/">huggingface</a> which includes a <u>RoBERTa/BERT</u> model base in Pytorch. On top of the <u>RoBERTa/BERT</u> base, we trained two layers of GRU (Gated Recurrent Unit) to predict the probability for 3 sentiment classes: “Negative”, “Neutral” and “Positive”, with the cross-entropy loss function minimized on <u>Stochastic Gradient Descent Optimizer</u>.
-                            </p>
-
-                            <p class="barContent">
-                                We split the SemEval-2017 Task 4A Dataset into train, validation and test sets. The statistics are the following:
+                                We splitted the SemEval-2017 Task 4A Dataset into train, validation and test sets. The statistics is the following:
                             </p>
 
                             <!--Table-->
@@ -296,9 +293,13 @@
                             </table></div>
                             <script charset="utf-8">var TGSort=window.TGSort||function(n){"use strict";function r(n){return n?n.length:0}function t(n,t,e,o=0){for(e=r(n);o<e;++o)t(n[o],o)}function e(n){return n.split("").reverse().join("")}function o(n){var e=n[0];return t(n,function(n){for(;!n.startsWith(e);)e=e.substring(0,r(e)-1)}),r(e)}function u(n,r,e=[]){return t(n,function(n){r(n)&&e.push(n)}),e}var a=parseFloat;function i(n,r){return function(t){var e="";return t.replace(n,function(n,t,o){return e=t.replace(r,"")+"."+(o||"").substring(1)}),a(e)}}var s=i(/^(?:\s*)([+-]?(?:\d+)(?:,\d{3})*)(\.\d*)?$/g,/,/g),c=i(/^(?:\s*)([+-]?(?:\d+)(?:\.\d{3})*)(,\d*)?$/g,/\./g);function f(n){var t=a(n);return!isNaN(t)&&r(""+t)+1>=r(n)?t:NaN}function d(n){var e=[],o=n;return t([f,s,c],function(u){var a=[],i=[];t(n,function(n,r){r=u(n),a.push(r),r||i.push(n)}),r(i)<r(o)&&(o=i,e=a)}),r(u(o,function(n){return n==o[0]}))==r(o)?e:[]}function v(n){if("TABLE"==n.nodeName){for(var a=function(r){var e,o,u=[],a=[];return function n(r,e){e(r),t(r.childNodes,function(r){n(r,e)})}(n,function(n){"TR"==(o=n.nodeName)?(e=[],u.push(e),a.push(n)):"TD"!=o&&"TH"!=o||e.push(n)}),[u,a]}(),i=a[0],s=a[1],c=r(i),f=c>1&&r(i[0])<r(i[1])?1:0,v=f+1,p=i[f],h=r(p),l=[],g=[],N=[],m=v;m<c;++m){for(var T=0;T<h;++T){r(g)<h&&g.push([]);var C=i[m][T],L=C.textContent||C.innerText||"";g[T].push(L.trim())}N.push(m-v)}t(p,function(n,t){l[t]=0;var a=n.classList;a.add("tg-sort-header"),n.addEventListener("click",function(){var n=l[t];!function(){for(var n=0;n<h;++n){var r=p[n].classList;r.remove("tg-sort-asc"),r.remove("tg-sort-desc"),l[n]=0}}(),(n=1==n?-1:+!n)&&a.add(n>0?"tg-sort-asc":"tg-sort-desc"),l[t]=n;var i,f=g[t],m=function(r,t){return n*f[r].localeCompare(f[t])||n*(r-t)},T=function(n){var t=d(n);if(!r(t)){var u=o(n),a=o(n.map(e));t=d(n.map(function(n){return n.substring(u,r(n)-a)}))}return t}(f);(r(T)||r(T=r(u(i=f.map(Date.parse),isNaN))?[]:i))&&(m=function(r,t){var e=T[r],o=T[t],u=isNaN(e),a=isNaN(o);return u&&a?0:u?-n:a?n:e>o?n:e<o?-n:n*(r-t)});var C,L=N.slice();L.sort(m);for(var E=v;E<c;++E)(C=s[E].parentNode).removeChild(s[E]);for(E=v;E<c;++E)C.appendChild(s[v+L[E-v]])})})}}n.addEventListener("DOMContentLoaded",function(){for(var t=n.getElementsByClassName("tg"),e=0;e<r(t);++e)try{v(t[e])}catch(n){}})}(document)</script><!--Table end-->
                             <!--end Table-->
-
                             <p class="barContent">
-                                We train the model on the train set and select the model with the lowest validation loss (the value of the loss function on the validation set). Our final model has the following performance, evaluated using the validation set and the test set:
+                                In our sentiment analysis task, we utilize the transformers library by <a href="https://huggingface.co/">huggingface</a> which includes a <u>RoBERTa/BERT</u> model base in Pytorch. On top of the <u>RoBERTa/BERT</u> base, we trained two layers of GRU (Gated Recurrent Unit) to predict the probability for 3 sentiment classes: “Negative”, “Neutral” and “Positive”, with the cross-entropy loss function minimized on <u>Stochastic Gradient Descent Optimizer</u>. We train the model on the train set and select the model with the lowest validation loss (the value of the loss function on the validation set).
+
+                            </p>
+                            <h4 id="line3_3"> Performance</h4>
+                            <p class="barContent">
+                                Our final model has the following performance, evaluated using the validation set and the test set:
                             </p>
 
                             <!--Table-->
@@ -354,11 +355,18 @@
 
                     <div class="row">
                         <div class="col-md-12 left-align">
-                            <h2 class="dark-text">Necessary Plugins <a href="#top">#back to top</a></h2>
+                            <h2 class="dark-text">Data Exploration<a></a></h2>
                         </div>
                         <!-- end col -->
                     </div>
                     <!-- end row -->
+                    <p class="barContent"> 
+                    
+                    </p>
+                        <img src="./images/data/create_time.png" style="height:200px; padding-bottom: 3px">
+                        <img src="./images/data/retweet.png" style="height:200px; padding-bottom: 3px">
+                        <img src="./images/data/followers.png" style="height:202px;">
+                        <img src="./images/data/default_users.png" style="height:202px; width: 250.5px">
 
                     <div class="row">
                         <div class="col-md-4">
@@ -400,7 +408,7 @@
 
                     <div class="row">
                         <div class="col-md-12 left-align">
-                            <h2 class="dark-text">Creating Blog Pages <a href="#top">#back to top</a></h2>
+                            <h2 class="dark-text">Data Analysis with the Model <a></a></h2>
                         </div>
                         <!-- end col -->
                     </div>
@@ -458,7 +466,7 @@
 
                     <div class="row">
                         <div class="col-md-12 left-align">
-                            <h2 class="dark-text">How to Install Revolution Slider <a href="#top">#back to top</a></h2>
+                            <h2 class="dark-text">References <a></a></h2>
                         </div>
                         <!-- end col -->
                     </div>
@@ -487,6 +495,26 @@
                 <!-- end section -->
                 <hr class="bar">
                 <!-- end section -->
+                <section id="line7" class="section">
+                    <div class="row">
+                        <div class="col-md-12 left-align">
+                            <h2 class="dark-text">Authors <a></a></h2>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                    <p>
+                    We are a group of third-year undergraduate students at the University of Toronto: <br><br>
+                        <a href="https://yuchenwyc.github.io/">Yuchen Wang</a>,
+                        <a href="http://www.tingfengx.com/">Tingfeng Xia</a>,
+                        Gongyi Shi,
+                        Chen Ding
+                    </p>
+                    
+                </section>
+                <hr>
+                <!-- end section -->
+
 
             </div>
             <!-- // end .col -->
