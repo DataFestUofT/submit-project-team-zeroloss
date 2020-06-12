@@ -407,6 +407,7 @@ a:hover {
 }
 
 #word_cloud_explanation{
+    color: #656565;
     text-align: center;
     line-height: 20px;
     background-color: rgb(255, 250, 236);
