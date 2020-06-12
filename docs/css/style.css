@@ -405,3 +405,10 @@ a:hover {
 .navbar-inverse li.btn a {
     color: #ffffff !important;
 }
+
+#word_cloud_explanation{
+    text-align: center;
+    line-height: 20px;
+    background-color: rgb(255, 250, 236);
+    /*margin-right: 40px;*/
+}
