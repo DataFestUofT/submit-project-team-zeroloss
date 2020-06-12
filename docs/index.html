@@ -199,27 +199,34 @@
                                 (Release 12.0). To train and evaluate our model, we used SemEval-2017 Task 4A dataset.
                         </div>
                         <div class="col-md-12">
-                            <h4 id="line2_2">Preprocessing</h4>
+                            <span class="svg_parent_container">
+                                <div class="svg_container">
+                                    <img src="./images/text_pipeline.svg" width="100%"></img>
+                                    <p class="figure_text">Figure 1. Text Processing Pipeline</p>
+                                </div>
+                                <div class="svg_container">
+                                    <img src="./images/covid_19_dataset.svg" width="100%"></img>
+                                    <p class="figure_text">Figure 2. Preprocessing</p>
+                                </div>
+                            </span>
+
+                            <h4 id="line2_2">Preprocessing (Getting Actual Tweets)</h4>
                             <p class="barContent">
-                                The raw data from COVID-19 Twitter dataset (Release 12.0) contains a total of 331M tweet
-                                ID entries. As shown in Figure, we first randomly sampled 10,000 tweet IDs for each day
-                                from March 19th to May 30th (74 continuous days). By querying the twitter server, we
-                                hydrated the selected tweet ids to get the text and user information associated.
-                                (“Hydrate a tweet ID” simply means to get the tweet text and user information for the
-                                tweet specified by the tweet ID). We then filtered out all tweets from users whose
-                                location information implies they are in the states.
+                                The raw data from COVID-19 Twitter dataset (Release 12.0) contains a total of 331M tweet 
+                                ID entries. As shown in Figure 2, we first randomly sampled 10,000 tweet IDs for each day 
+                                from March 19th to May 30th (74 continuous days). By querying the twitter server, we 
+                                hydrated the selected tweet ids to get the text and user information associated. ("Hydrate 
+                                a tweet ID" simply means to get the tweet text and user information for the tweet specified 
+                                by the tweet ID). We then filtered out all tweets from users whose location information 
+                                implies they are in the states.
                             </p>
-                            <h4 id="line2_3">Text Processing</h4>
+                            <h4 id="line2_3">Text Processing Pipeline</h4>
                             <p class="barContent">
-                                For the purpose of boosting our model’s performance, we preprocessed the tweet texts in
-                                the two datasets using a pipeline as shown in Figure. To be more specific, we first
-                                convert emoji to text, expand common ASCII and abbreviated text emoticons into
-                                human-readable text. The second step is to remove URLs present, replace “@[username]”
-                                with just “someone”, and expand hashtags (e.g. “#ATwitterHashtag” into “a twitter
-                                hashtag”). In the third step, we use WordNet to lemmatize the tweet text, changing words
-                                in different parts of speech and plural forms into one common canonical form. These
-                                three steps aim to make sure our RoBERTa based embedding can comprehend as much useful
-                                information as possible.
+                                For the purpose of boosting our model's performance, we preprocessed the tweet texts in the 
+                                two datasets using a pipeline as shown in Figure 1. To be more specific, we first expand 
+                                emojis and abbreviated forms (e.g. "we're" into "we are"). The second step is to remove URLs 
+                                present and replace "@<username>" with a special token "[someone]". These two steps aim to make 
+                                    sure our RoBERTa based embedding can comprehend as much useful information as possible. 
                             </p>
                         </div>
                         <!-- end col -->

@@ -412,3 +412,12 @@ a:hover {
     background-color: rgb(255, 250, 236);
     /*margin-right: 40px;*/
 }
+
+.svg_container {
+    display: inline-block;
+    padding-left: 10%;
+}
+
+.figure_text {
+    text-align: center;
+}
