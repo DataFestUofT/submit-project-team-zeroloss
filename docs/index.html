@@ -29,6 +29,10 @@
     <link rel="stylesheet" type="text/css" href="css/prettyPhoto.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="js/syntax-highlighter/styles/shCore.css" media="all">
     <link rel="stylesheet" type="text/css" href="js/syntax-highlighter/styles/shThemeRDark.css" media="all">
 
@@ -872,38 +876,85 @@
 
                     <h4 id="line5_2">Analysis 2: Cross-Group Comparisons</h4>
 
-                    <div>
-                        <div>
-                            <div style="float: left; width: 50%; padding: 0px;">
-                                <img src="./images/6_comparisons/01.png" alt="six comparisons" style="width:100%">
+
+                    <div class="two_iamge_row">
+                        <div style="float: left; width: 50%; padding: 0px;">
+                            <img src="./images/6_comparisons/01.png" alt="six comparisons" style="width:100%">
+                        </div>
+                        <div style="float: left; width: 50%; padding: 0px;">
+                            <img src="./images/6_comparisons/02.png" alt="six comparisons" style="width:100%">
+                        </div>
+                    </div> 
+                    <div class="two_iamge_row">
+                        <div style="float: left; width: 50%; padding: 0px;">
+                            <img src="./images/6_comparisons/03.png" alt="six comparisons" style="width:100%">
+                        </div>
+                        <div style="float: left; width: 50%; padding: 0px; display: block;">
+                            <img src="./images/6_comparisons/04.png" alt="six comparisons" style="width:100%">
+                        </div>
+                    </div> 
+                    <div class="two_iamge_row">
+                        <div style="float: left; width: 50%; padding: 0px;display: block;">
+                            <img src="./images/6_comparisons/05.png" alt="six comparisons" style="width:100%">
+                        </div>
+                        <div style="float: left; width: 50%; padding: 0px; display: block;">
+                            <img src="./images/6_comparisons/06.png" alt="six comparisons" style="width:100%">
+                        </div>
+                        <br><br>
+                    </div>  
+
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                            <li data-target="#myCarousel" data-slide-to="4"></li>
+                            <li data-target="#myCarousel" data-slide-to="5"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="./images/6_comparisons/01.png" alt="01" style="width:100%;">
                             </div>
-                            <div style="float: left; width: 50%; padding: 0px;">
-                                <img src="./images/6_comparisons/02.png" alt="six comparisons" style="width:100%">
+
+                            <div class="item">
+                                <img src="./images/6_comparisons/02.png" alt="02" style="width:100%;">
                             </div>
-                        </div> 
-                        <div>
-                            <div style="float: left; width: 50%; padding: 0px;">
-                                <img src="./images/6_comparisons/03.png" alt="six comparisons" style="width:100%">
+
+                            <div class="item">
+                                <img src="./images/6_comparisons/03.png" alt="03" style="width:100%;">
                             </div>
-                            <div style="float: left; width: 50%; padding: 0px;">
-                                <img src="./images/6_comparisons/04.png" alt="six comparisons" style="width:100%">
+
+                            <div class="item">
+                                <img src="./images/6_comparisons/04.png" alt="04" style="width:100%;">
                             </div>
-                        </div> 
-                        <div>
-                            <div style="float: left; width: 50%; padding: 0px;">
-                                <img src="./images/6_comparisons/05.png" alt="six comparisons" style="width:100%">
+                            
+                            <div class="item">
+                                <img src="./images/6_comparisons/05.png" alt="05" style="width:100%;">
                             </div>
-                            <div style="float: left; width: 50%; padding: 0px;">
-                                <img src="./images/6_comparisons/06.png" alt="six comparisons" style="width:100%">
+
+                            <div class="item">
+                                <img src="./images/6_comparisons/06.png" alt="06" style="width:100%;">
                             </div>
-                            <br><br>
-                        </div>  
-                        <figure style="height: 800px;">
-                            <caption></caption>
-                        </figure>               
+
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                        </a>
                     </div>
 
-                    <p>
+
+                    <p style="padding-top: 10px;">
                         We plotted the sentiment scores against different groups in our dataset, e.g., different 
                         ranges of retweet counts, or whether the user of the tweet has the default profile background 
                         image. There are several discoveries we found from the figures. Firstly, the positive sentiment
