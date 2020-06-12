@@ -1,9 +1,3 @@
-.two_iamge_row::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
 /* Zooming  */
 .image-zoom-container {
     list-style: none;
