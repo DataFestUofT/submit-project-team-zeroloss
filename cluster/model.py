@@ -1,3 +1,6 @@
+"""
+Tuning hyperparamters on computing clusters
+"""
 # coding: utf-8
 
 # In[1]:
