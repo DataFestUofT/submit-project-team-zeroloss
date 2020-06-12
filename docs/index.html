@@ -128,24 +128,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="barContent">Coronavirus disease 2019 (COVID-19), caused by severe acute
-                                    respiratory syndrome coronavirus 2 (SARS-CoV-2), grew rapidly in scale and severity,
-                                    and
-                                    was officially declared as a pandemic on March 11th, 2020. In the United States, the
-                                    country with the highest confirmed cases, the government has announced a number of
-                                    policies, including shutting down schools and workplaces, promoting social
-                                    distancing,
-                                    advising people to wear masks in public areas, etc. The U.S. president Donald Trump
-                                    also
-                                    broadcasts his opinions towards the pandemic, whose words might have an impact on
-                                    the
-                                    public's attitude.
+                                    respiratory syndrome coronavirus 2 (SARS-CoV-2), proliferated in scale and severity
+                                    and officially declared a pandemic on March 11th, 2020. In the United States, the
+                                    country has the highest number of confirmed cases. The government has announced many
+                                    policies, including shutting down schools and workplaces and promoting social
+                                    distancing, advising people to wear masks in public areas. The U.S. President Donald
+                                    Trump also broadcasts his opinions towards the pandemic, whose words might have an
+                                    impact on the public's attitude.
 
-                                    In this study, applying the state-of-art natural language processing model, we
-                                    attempt
-                                    to analyze how the overall sentiment of COVID-19 related tweets changes with
-                                    trending
-                                    COVID-19 related topics - important policy decisions or influential words by
-                                    politicians. </p>
+                                    In this study, we attempt to analyze how the overall sentiment of COVID-19 related
+                                    tweets changes with heated news by using natural language processing tools. </p>
 
                             </div>
                         </div>
@@ -186,31 +178,22 @@
 
                                 <h4 id="line2_2">Preprocessing (Getting Actual Tweets)</h4>
                                 <p class="barContent">
-                                    The raw data from COVID-19 Twitter dataset (Release 12.0) contains a total of 331M
-                                    tweet
-                                    ID entries. As shown in Figure 2, we first randomly sampled 10,000 tweet IDs for
-                                    each day
-                                    from March 19th to May 30th (74 continuous days). By querying the twitter server, we
-                                    hydrated the selected tweet ids to get the text and user information associated.
-                                    ("Hydrate
-                                    a tweet ID" simply means to get the tweet text and user information for the tweet
-                                    specified
-                                    by the tweet ID). We then filtered out all tweets from users whose location
-                                    information
-                                    implies they are in the states.
+                                    The raw data from the COVID-19 Twitter dataset (Release 12.0) contains a total of
+                                    331M tweet ID entries. As shown in Figure 2, we randomly sampled 10,000 tweet IDs
+                                    for each day from March 19th to May 30th (74 consecutive days). By querying the
+                                    twitter server, we hydrated the selected tweet ids to get the text and associated
+                                    user information. (“Hydrate a tweet ID” means to get the tweet text and user
+                                    information for the tweet specified by the tweet ID). We then filtered out all
+                                    tweets from users whose location information implies they are in the states.
                                 </p>
                                 <h4 id="line2_3">Text Processing Pipeline</h4>
                                 <p class="barContent">
-                                    For the purpose of boosting our model's performance, we preprocessed the tweet texts
-                                    in the
-                                    two datasets using a pipeline as shown in Figure 1. To be more specific, we first
-                                    expand
-                                    emojis and abbreviated forms (e.g. "we're" into "we are"). The second step is to
-                                    remove URLs
-                                    present and replace "@username" with a special token "[someone]". These two steps
-                                    aim to make
-                                    sure our RoBERTa based embedding can comprehend as much useful information as
-                                    possible.
+                                    To boost our model’s performance, we preprocessed the tweet texts in the two
+                                    datasets using a pipeline, as shown in Figure 1. To be more specific, we first
+                                    expand emojis and abbreviated forms (e.g. “we’re” into “we are”). The second step is
+                                    to remove URLs present and replace “@<username>” with a special token “[someone]”.
+                                        These two steps aim to make sure our RoBERTa based embedding can comprehend as
+                                        much useful information as possible.
                                 </p>
                             </div>
                             <!-- end col -->
@@ -242,7 +225,7 @@
                                 <h4 id="line3_1">the RoBERTa Model</h4>
                                 <p class="barContent">The RoBERTa (Robustly Optimized BERT Pretraining) model was
                                     proposed
-                                    by Yinhan Liu et al in 2018. It builds on BERT (Bidirectional Encoder
+                                    by Yinhan Liu et al in 2019. It builds on BERT (Bidirectional Encoder
                                     Representations
                                     from Transformers), which is a language representation model designed to pre-train
                                     deep
@@ -550,12 +533,13 @@
                                 <!--Table end-->
                                 <!--end Table-->
                                 <p class="barContent">
-                                    In our sentiment analysis task, we utilize the transformers library by <a
-                                        href="https://huggingface.co/">huggingface</a> which includes a RoBERTa model
+                                    <br> In our sentiment analysis task, we utilize the transformers library by <a
+                                        href="https://huggingface.co/">huggingface</a>, which includes a RoBERTa model
                                     base
                                     in Pytorch. On top of the RoBERTa base, we trained two layers of GRU (Gated
                                     Recurrent
-                                    Unit) to predict probability for 3 sentiment classes: 0 for “Negative”, 1 for
+                                    Unit) to predict the probability for three sentiment classes: 0 for “Negative”, 1
+                                    for
                                     “Neutral”
                                     and 2 for“Positive”, with the cross-entropy loss function minimized on Stochastic
                                     Gradient Descent Optimizer. We train the model on the train set and select the model
@@ -858,13 +842,18 @@
                             <!-- end col -->
                         </div>
                         <!-- end row -->
+                        <p class="barContent">
+                            Recall that the predicted sentiment is represented by three integer scores: 0 for negative,
+                            1 for neutral, and 2 for positive. Using our model to predict a sentiment score for each of
+                            the tweet texts in our COVID-19 dataset, we can do various analyses and interpretations.</p>
 
                         <h4 id="line5_1">Analysis 1: Sentiment Scores against Dates</h4>
                         <figure style="padding-bottom: 6px;">
                             <img src="./images/main_pred.jpg" alt="time series sentiment" width="100%">
                             <figcaption
                                 style="font-size: smaller; line-height: 20px; border: 1px solid; padding: 10px; box-shadow: 5px 10px #888888;">
-                                <b style="color: red;">[1]</b> (March 21) China reported no new domestic cases in Wuhan for a third consecutive day. <br>
+                                <b style="color: red;">[1]</b> (March 21) China reported no new domestic cases in Wuhan
+                                for a third consecutive day. <br>
                                 <b style="color: red;">[2]</b> (March 22) President Trump announced that he would
                                 activate the federal National Guard to assist Washington, California and New York, three
                                 of the states hit hardest by the pandemic. <br>
@@ -894,21 +883,30 @@
                                 videoconference, Fauci warned of serious consequences if governors reopen state
                                 economies prematurely.<br>
                                 <b style="color: red;">[11]</b> (May 22) An experimental coronavirus vaccine under
-                                development at the University of Oxford progressed to advanced stages of human trials.<br>
-                                <b style="color: rgb(250, 135, 27);">[*]</b> (May 25 - June 1) Outbreak of George Floyd and Black Lives
+                                development at the University of Oxford progressed to advanced stages of human
+                                trials.<br>
+                                <b style="color: rgb(250, 135, 27);">[*]</b> (May 25 - June 1) Outbreak of George Floyd
+                                and Black Lives
                                 Matter protests.
                             </figcaption>
                         </figure>
                         <p class="barContent" style="padding-top: 10px;">
-                            Above is a graph we built that shows changes in the daily average sentiment score from March 19 to June 1. On some of the interesting peaks and valleys, 
+                            Above is a graph we built that shows changes in the daily average sentiment score from March
+                            19 to June 1. On some of the interesting peaks and valleys,
                             we found headlines of the corresponding dates. <br><br>
 
-                            During the 74 days, the average score is consistently fluctuating between 0.65 and 1 (a higher score means overall a more positive attitude in tweets).
-                            On March 21, China reported no new domestic cases in Wuhan for a third consecutive day, and we can see a relative positive sentiment of Twitter users in US.
-                            On the next day, the graph shows a fall of the score, while President Trump announced that he would activate the federal National Guard to assist Washington, 
+                            During the 74 days, the average score is consistently fluctuating between 0.65 and 1 (a
+                            higher score means overall a more positive attitude in tweets).
+                            On March 21, China reported no new domestic cases in Wuhan for a third consecutive day, and
+                            we can see a relatively positive sentiment of Twitter users in the U.S.
+                            The next day, the graph shows a fall of the score, while President Trump announced he would
+                            activate the federal National Guard to assist Washington,
                             California and New York.
-                            On April 6, the coronavirus death toll in the U.S. surged past 10,000, and there is a sharp decrease in the scores.
-                            For another notable instance, there is a significant declining trend of feelings in people's expression after May 25th, which matches the period of nation-wide George Floyd protest eruptions.
+                            On April 6, the coronavirus death toll in the U.S. surged past 10,000, and there is a sharp
+                            decrease in the scores.
+                            For another notable instance, there is a significant declining trend of feelings in people's
+                            expression after May 25, which matches the period of nation-wide George Floyd protest
+                            eruptions.
                         </p>
 
                         <h4 id="line5_2">Analysis 2: Cross-Group Comparisons</h4>
@@ -944,22 +942,19 @@
                         <p class="barContent" style="padding-top: 10px;">
                             We plotted the sentiment scores against different groups in our dataset, e.g., different
                             ranges of retweet counts, or whether the user of the tweet has the default profile
-                            background
-                            image. There are several discoveries we found from the figures. Firstly, the positive
-                            expression 
-                            is very rare among the COVID-19 related tweets compared to the other two sentiments.
-                            Secondly, more than 80 percent of the popular tweets (which have >20k retweet counts) have negative sentiment; tweets that were published by most-followed
-                            Twitter
-                            users (who have 20k-50k followers) also have more than 80% of the negative sentiment.
-                            This indicates that celebrities tend to favor bad news in this pandemic; in the meantime, bad news is more likely
-                            to
-                            draw people’s attention. Furthermore, accounts that were created the earliest in time (2006) or
-                            had issued
-                            the least tweets (<5000) are inclined to express more positively than other users. </p>
+                            background image. There are several discoveries we found from the figures. Firstly, the
+                            positive expression is infrequent among the COVID-19 related tweets compared to the other
+                            two sentiments. Secondly, more than 80 percent of the popular tweets (which have >20k
+                            retweet counts) have negative sentiment; tweets that were published by most-followed Twitter
+                            users (who have 20k-50k followers) also have more than 80% of the negative sentiment. This
+                            indicates that celebrities tend to favour the bad news in this pandemic; in the meantime,
+                            the bad news is more likely to draw people’s attention. Furthermore, accounts that were
+                            created the earliest (2006) or had issued the least tweets (<5000) are inclined to express
+                                more positively than other users. </p>
                                 <p class="barContent">
                                     However, in contrast to our hypothesis, whether a username contains emoji or
                                     whether a
-                                    user has the default profile page do not appear to influence the sentiment scores.
+                                    user has the default profile page does not appear to influence the sentiment scores.
                                 </p>
 
                                 <h4 id="line5_3">Method Limitations and Further Discussions</h4>
