@@ -46,15 +46,15 @@ def main():
     auth = tweepy.OAuthHandler(keys['consumer_key'], keys['consumer_secret'])
     auth.set_access_token(keys['access_token'], keys['access_token_secret'])
     api = tweepy.API(auth)
-    
+
     output_file = args.outputfile
-    output_file_noformat = output_file.split(".",maxsplit=1)[0]
+    output_file_noformat = output_file.split(".", maxsplit=1)[0]
     print(output_file)
     output_file = '{}'.format(output_file)
     output_file_short = '{}_short.json'.format(output_file_noformat)
-    compression = zipfile.ZIP_DEFLATED    
+    compression = zipfile.ZIP_DEFLATED
     ids = []
-    
+
     if '.tsv' in args.inputfile:
         inputfile_data = pd.read_csv(args.inputfile, sep='\t')
         print('tab seperated file, using \\t delimiter')
@@ -79,15 +79,15 @@ def main():
     last_tweet = None
     if osp.isfile(args.outputfile):
         with open(output_file, 'rb') as f:
-            #may be a large file, seeking without iterating
+            # may be a large file, seeking without iterating
             f.seek(-2, os.SEEK_END)
             while f.read(1) != b'\n':
                 f.seek(-2, os.SEEK_CUR)
             last_line = f.readline().decode()
         last_tweet = json.loads(last_line)
         start = ids.index(last_tweet['id'])
-        end = start+100
-        i = int(math.ceil(float(limit-start) / 100))
+        end = start + 100
+        i = int(math.ceil(float(limit - start) / 100))
 
     print('metadata collection complete')
     print('creating master json file')
@@ -115,7 +115,6 @@ def main():
     zf.write(output_file, compress_type=compression)
     zf.close()
 
-
     def is_retweet(entry):
         return 'retweeted_status' in entry.keys()
 
@@ -124,13 +123,12 @@ def main():
             return entry["source"].split('>')[1].split('<')[0]
         else:
             return entry["source"]
-    
-    
+
     print('creating minimized json master file')
     with open(output_file_short, 'w') as outfile:
         with open(output_file) as json_data:
             for tweet in json_data:
-                data = json.loads(tweet)            
+                data = json.loads(tweet)
                 t = {
                     "created_at": data["created_at"],
                     "text": data["text"],
@@ -143,16 +141,19 @@ def main():
                 }
                 json.dump(t, outfile)
                 outfile.write('\n')
-        
+
     f = csv.writer(open('{}.csv'.format(output_file_noformat), 'w'))
-    print('creating CSV version of minimized json master file') 
-    fields = ["favorite_count", "source", "text", "in_reply_to_screen_name", "is_retweet", "created_at", "retweet_count", "id_str"]                
-    f.writerow(fields)       
+    print('creating CSV version of minimized json master file')
+    fields = ["favorite_count", "source", "text", "in_reply_to_screen_name", "is_retweet", "created_at",
+              "retweet_count", "id_str"]
+    f.writerow(fields)
     with open(output_file_short) as master_file:
         for tweet in master_file:
-            data = json.loads(tweet)            
-            f.writerow([data["favorite_count"], data["source"], data["text"].encode('utf-8'), data["in_reply_to_screen_name"], data["is_retweet"], data["created_at"], data["retweet_count"], data["id_str"].encode('utf-8')])
-    
+            data = json.loads(tweet)
+            f.writerow(
+                [data["favorite_count"], data["source"], data["text"].encode('utf-8'), data["in_reply_to_screen_name"],
+                 data["is_retweet"], data["created_at"], data["retweet_count"], data["id_str"].encode('utf-8')])
+
 
 # main invoked here    
 main()

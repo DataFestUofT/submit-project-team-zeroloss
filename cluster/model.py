@@ -55,7 +55,6 @@ parser.add_argument('-sn', '--save-name', action="store", dest="save_name", defa
 
 cmd_args = parser.parse_args()
 
-
 args = {
     'batch_size': cmd_args.bs,
     'lr': cmd_args.lr,
@@ -70,7 +69,6 @@ args = {
     'lr_decay': 0.7
 }
 
-
 SEED = 921921
 
 random.seed(SEED)
@@ -78,7 +76,6 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-
 
 # In[2]:
 
@@ -95,12 +92,10 @@ train_data = df.iloc[:train_num, :].reset_index()
 valid_data = df.iloc[train_num:valid_num, :].reset_index()
 test_data = df.iloc[valid_num:, :].reset_index()
 
-
 # In[3]:
 
 
 df.head()
-
 
 # In[4]:
 
@@ -108,16 +103,15 @@ num_positive = (df["sentiment"] == "positive").sum()
 num_negative = (df["sentiment"] == "negative").sum()
 num_neutral = (df["sentiment"] == "neutral").sum()
 
-args["weight"] = torch.tensor([num_negative / len(df), num_neutral / len(df), num_positive / len(df)], dtype=torch.float32)
+args["weight"] = torch.tensor([num_negative / len(df), num_neutral / len(df), num_positive / len(df)],
+                              dtype=torch.float32)
 
 print(args["weight"])
-
 
 # In[5]:
 
 
 tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
-
 
 # In[6]:
 
@@ -152,17 +146,15 @@ max_len_test = get_max_len(tokenized_test)
 print(max_len_test)
 max_len = max([max_len_train, max_len_valid, max_len_test])
 
-
 # In[9]:
 
 
-padded_train = torch.tensor([i + [0] * (max_len - len(i)) 
+padded_train = torch.tensor([i + [0] * (max_len - len(i))
                              for i in tokenized_train.values])
-padded_valid = torch.tensor([i + [0] * (max_len - len(i)) 
+padded_valid = torch.tensor([i + [0] * (max_len - len(i))
                              for i in tokenized_valid.values])
-padded_test = torch.tensor([i + [0] * (max_len - len(i)) 
+padded_test = torch.tensor([i + [0] * (max_len - len(i))
                             for i in tokenized_test.values])
-
 
 # In[10]:
 
@@ -187,6 +179,7 @@ test_label = torch.tensor(test_data['sentiment'].replace(
 # Define the dataset and data iterators
 class Dataset(data.Dataset):
     'Characterizes a dataset for PyTorch'
+
     def __init__(self, x, labels):
         'Initialization'
         self.x = x
@@ -222,9 +215,9 @@ valid_loader = torch.utils.data.DataLoader(validset,
                                            shuffle=True,
                                            drop_last=True)
 test_loader = torch.utils.data.DataLoader(testset,
-                                           batch_size=args['batch_size'],
-                                           shuffle=True,
-                                           drop_last=True)
+                                          batch_size=args['batch_size'],
+                                          shuffle=True,
+                                          drop_last=True)
 
 
 # In[13]:
@@ -246,20 +239,20 @@ class BERTGRUSentiment(nn.Module):
                  n_layers,
                  bidirectional,
                  dropout):
-        
+
         super().__init__()
-        
+
         self.bert = bert
-        
-#         embedding_dim = bert.config.to_dict()['dim']
+
+        #         embedding_dim = bert.config.to_dict()['dim']
         embedding_dim = 768
-    
+
         self.rnn = nn.GRU(embedding_dim,
                           hidden_dim,
-                          num_layers = n_layers,
-                          bidirectional = bidirectional,
-                          batch_first = True,
-                          dropout = 0 if n_layers < 2 else dropout)
+                          num_layers=n_layers,
+                          bidirectional=bidirectional,
+                          batch_first=True,
+                          dropout=0 if n_layers < 2 else dropout)
 
         self.linear1 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim,
                                  hidden_dim * 2 if bidirectional else hidden_dim)
@@ -268,34 +261,33 @@ class BERTGRUSentiment(nn.Module):
         self.linear2 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, output_dim)
         nn.init.xavier_normal_(self.linear2.weight)
         self.dropout = nn.Dropout(dropout)
-        
+
     def forward(self, text):
-        
-        #text = [batch size, sent len]
+
+        # text = [batch size, sent len]
         attention_mask = text.masked_fill(text != 0, 1)
-                
+
         with torch.no_grad():
             embedded = self.bert(text, attention_mask=attention_mask)[0]
-                
-        #embedded = [batch size, sent len, emb dim]
-        
-        _, hidden = self.rnn(embedded)
-        
-        #hidden = [n layers * n directions, batch size, emb dim]
-        
-        if self.rnn.bidirectional:
-            hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
-        else:
-            hidden = self.dropout(hidden[-1,:,:])
-                
-        #hidden = [batch size, hid dim]
-        
-        output = self.linear2(self.relu(self.linear1(hidden)))
-        
-        #output = [batch size, out dim]
-        
-        return output
 
+        # embedded = [batch size, sent len, emb dim]
+
+        _, hidden = self.rnn(embedded)
+
+        # hidden = [n layers * n directions, batch size, emb dim]
+
+        if self.rnn.bidirectional:
+            hidden = self.dropout(torch.cat((hidden[-2, :, :], hidden[-1, :, :]), dim=1))
+        else:
+            hidden = self.dropout(hidden[-1, :, :])
+
+        # hidden = [batch size, hid dim]
+
+        output = self.linear2(self.relu(self.linear1(hidden)))
+
+        # output = [batch size, out dim]
+
+        return output
 
 
 class BERTLSTMSentiment(nn.Module):
@@ -306,61 +298,61 @@ class BERTLSTMSentiment(nn.Module):
                  n_layers,
                  bidirectional,
                  dropout):
-        
+
         super().__init__()
-        
+
         self.bert = bert
-        
-#         embedding_dim = bert.config.to_dict()['dim']
+
+        #         embedding_dim = bert.config.to_dict()['dim']
         embedding_dim = 768
-    
+
         self.rnn = nn.LSTM(embedding_dim,
                            hidden_dim,
-                           num_layers = n_layers,
-                           bidirectional = bidirectional,
-                           batch_first = True,
-                           dropout = 0 if n_layers < 2 else dropout)
+                           num_layers=n_layers,
+                           bidirectional=bidirectional,
+                           batch_first=True,
+                           dropout=0 if n_layers < 2 else dropout)
 
-        self.linear1 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, 
+        self.linear1 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim,
                                  hidden_dim * 2 if bidirectional else hidden_dim)
         nn.init.kaiming_normal_(self.linear1.weight, nonlinearity="relu")
         self.relu = nn.ReLU()
         self.linear2 = nn.Linear(hidden_dim * 2 if bidirectional else hidden_dim, output_dim)
         nn.init.xavier_normal_(self.linear2.weight)
         self.dropout = nn.Dropout(dropout)
-        
+
     def forward(self, text):
-        
-        #text = [batch size, sent len]
+
+        # text = [batch size, sent len]
         attention_mask = text.masked_fill(text != 0, 1)
-                
+
         with torch.no_grad():
             embedded = self.bert(text, attention_mask=attention_mask)[0]
-                
-        #embedded = [batch size, sent len, emb dim]
-        
+
+        # embedded = [batch size, sent len, emb dim]
+
         _, (hidden, _) = self.rnn(embedded)
-        
-        #hidden = [n layers * n directions, batch size, emb dim]
-        
+
+        # hidden = [n layers * n directions, batch size, emb dim]
+
         if self.rnn.bidirectional:
-            hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
+            hidden = self.dropout(torch.cat((hidden[-2, :, :], hidden[-1, :, :]), dim=1))
         else:
-            hidden = self.dropout(hidden[-1,:,:])
-                
-        #hidden = [batch size, hid dim]
-        
+            hidden = self.dropout(hidden[-1, :, :])
+
+        # hidden = [batch size, hid dim]
+
         output = self.linear2(self.relu(self.linear1(hidden)))
-        
-        #output = [batch size, out dim]
-        
+
+        # output = [batch size, out dim]
+
         return output
+
 
 # In[15]:
 
 
 bert = RobertaModel.from_pretrained('roberta-base')
-
 
 # In[16]:
 
@@ -380,11 +372,10 @@ model = BERTLSTMSentiment(bert,
 
 model = model.to(device)
 
-
 # In[17]:
 
 
-for name, param in model.named_parameters():                
+for name, param in model.named_parameters():
     if name.startswith('bert'):
         param.requires_grad = False
 
@@ -395,16 +386,15 @@ for name, param in model.named_parameters():
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
-print(f'The model has {count_parameters(model):,} trainable parameters')
 
+print(f'The model has {count_parameters(model):,} trainable parameters')
 
 # In[19]:
 
 
-for name, param in model.named_parameters():                
+for name, param in model.named_parameters():
     if param.requires_grad:
         print(name)
-
 
 # In[31]:
 
@@ -414,10 +404,10 @@ for name, param in model.named_parameters():
 #                        betas=(args["b1"], args["b2"]),
 #                        weight_decay=args["weight_decay"])
 
-optimizer = optim.AdamW(model.parameters(), 
-                       lr=args['lr'], 
-                       betas=(args["b1"], args["b2"]),
-                       weight_decay=args["weight_decay"])
+optimizer = optim.AdamW(model.parameters(),
+                        lr=args['lr'],
+                        betas=(args["b1"], args["b2"]),
+                        weight_decay=args["weight_decay"])
 
 # optimizer = optim.SGD(model.parameters(), momentum=0.9, lr=args["lr"])
 
@@ -432,8 +422,8 @@ criterion = nn.CrossEntropyLoss(weight=args['weight']).to(device)
 def multi_acc(y_pred, y_label):
     softmax = nn.Softmax(dim=1)
     y_pred_softmax = softmax(y_pred)
-    _, y_pred_tags = torch.max(y_pred_softmax, dim = 1)
-#     print(y_pred_tags)
+    _, y_pred_tags = torch.max(y_pred_softmax, dim=1)
+    #     print(y_pred_tags)
 
     # accu
     correct_pred = (y_pred_tags == y_label).float()
@@ -446,7 +436,7 @@ def multi_acc(y_pred, y_label):
 
     # f1
     f1 = f1_score(y_label.detach().cpu(), y_pred_tags.detach().cpu(), average='weighted')
-    
+
     return acc, roc_auc, f1
 
 
@@ -454,29 +444,28 @@ def multi_acc(y_pred, y_label):
 
 
 def train(model, data_loader, optimizer, criterion):
-    
     epoch_loss = 0
     epoch_acc = 0
     epoch_rocauc = 0
     epoch_f1 = 0
-    
+
     model.train()
-    
+
     for batch_idx, (data, target) in enumerate(data_loader):
         data, target = data.to(device), target.to(device)
-        
+
         optimizer.zero_grad()
-        
+
         predictions = model(data).squeeze(1)
-        
+
         loss = criterion(predictions, target)
-        
+
         acc, roc_auc, f1 = multi_acc(predictions, target)
-        
+
         loss.backward()
-        
+
         optimizer.step()
-        
+
         epoch_loss += loss.item()
         epoch_acc += acc.item()
         epoch_rocauc += roc_auc
@@ -484,38 +473,38 @@ def train(model, data_loader, optimizer, criterion):
 
         # print("batch idx {}: | train loss: {} | train accu: {:.3f} | train roc: {:.3f} | train f1: {}".format(
         #     batch_idx, loss.item(), acc.item(), roc_auc, f1))
-        
-    return epoch_loss / len(data_loader), epoch_acc / len(data_loader), epoch_rocauc / len(data_loader), epoch_f1 / len(data_loader)
+
+    return epoch_loss / len(data_loader), epoch_acc / len(data_loader), epoch_rocauc / len(data_loader), epoch_f1 / len(
+        data_loader)
 
 
 # In[23]:
 
 
 def evaluate(model, data_loader, criterion):
-    
     epoch_loss = 0
     epoch_acc = 0
     epoch_rocauc = 0
     epoch_f1 = 0
     model.eval()
-    
+
     with torch.no_grad():
-    
         for batch_idx, (data, target) in enumerate(data_loader):
             data, target = data.to(device), target.to(device)
-            
+
             predictions = model(data).squeeze(1)
-            
+
             loss = criterion(predictions, target)
-            
+
             acc, roc_auc, f1 = multi_acc(predictions, target)
 
             epoch_loss += loss.item()
             epoch_acc += acc.item()
             epoch_rocauc += roc_auc
             epoch_f1 += f1
-        
-    return epoch_loss / len(data_loader), epoch_acc / len(data_loader), epoch_rocauc / len(data_loader), epoch_f1 / len(data_loader)
+
+    return epoch_loss / len(data_loader), epoch_acc / len(data_loader), epoch_rocauc / len(data_loader), epoch_f1 / len(
+        data_loader)
 
 
 # In[24]:
@@ -541,33 +530,33 @@ import time
 best_valid_loss = float('inf')
 
 for epoch in range(args['n_epochs']):
-    
+
     start_time = time.time()
-    
+
     train_loss, train_acc, train_rocauc, train_f1 = train(model, train_loader, optimizer, criterion)
     history["train_loss"].append(train_loss)
     valid_loss, valid_acc, valid_rocauc, valid_f1 = evaluate(model, valid_loader, criterion)
     history["valid_loss"].append(valid_loss)
     scheduler.step()
-        
+
     end_time = time.time()
-        
+
     epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-        
+
     if valid_loss < best_valid_loss:
         best_valid_loss = valid_loss
         torch.save(model.state_dict(), f"{cmd_args.save_name}.pt")
-    
-    print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-    print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f} | Train rocauc: {train_rocauc} | Train f1: {train_f1}%')
-    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f} | Val. rocauc: {valid_rocauc} | Val. f1: {valid_f1}%')
 
+    print(f'Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
+    print(
+        f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f} | Train rocauc: {train_rocauc} | Train f1: {train_f1}%')
+    print(
+        f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f} | Val. rocauc: {valid_rocauc} | Val. f1: {valid_f1}%')
 
 # In[26]:
 
 
 model.load_state_dict(torch.load(f"{cmd_args.save_name}.pt"))
-
 
 # In[27]:
 
@@ -579,10 +568,10 @@ test_loss, test_acc, test_rocauc, test_f1 = evaluate(model, test_loader, criteri
 print("Test loss: {} | Test Acc: {:.3f} | Test ROC-AUC: {} | Test f1: {} | model: {}".format(
     test_loss, test_acc, test_rocauc, test_f1, cmd_args.save_name))
 
-
 # In[28]:
 
 import matplotlib.pyplot as plt
+
 
 def plot_history(hist):
     plt.figure(figsize=(10, 7))
