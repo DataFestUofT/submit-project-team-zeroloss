@@ -91,11 +91,17 @@
                             <ul class="nav">
                                 <li><a href="#line3_1">the RoBERTa Model</a></li>
                                 <li><a href="#line3_2">Fine-tuning RoBERTa</a></li>
-                                <li><a href="#line3_2">Performance</a></li>
+                                <li><a href="#line3_3">Performance</a></li>
                             </ul>
                         </li>
                         <li><a href="#line4">Data Exploration</a></li>
-                        <li><a href="#line5">Data Analysis with the Model</a></li>
+                        <li><a href="#line5">Data Analysis with the Model</a>
+                            <ul class="nav">
+                                <li><a href="#line5_1">Analysis 1: General Sentiment Trend Against Major Events</a></li>
+                                <li><a href="#line5_2">Analysis 2: Cross-Group Comparisons</a></li>
+                                <li><a href="#line5_3">Model Limitations and Further Discussions</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#line6">References</a></li>
                         <li><a href="#line7">Authors</a></li>
                     </ul>
@@ -201,12 +207,12 @@
                         <div class="col-md-12">
                             <span class="svg_parent_container">
                                 <div class="svg_container">
-                                    <img src="./images/text_pipeline.svg" width="100%"></img>
-                                    <p class="figure_text">Figure 1. Text Processing Pipeline</p>
+                                    <img src="./images/covid_19_dataset.svg" width="100%"></img>
+                                    <p class="figure_text">Figure 1. Preprocessing</p>
                                 </div>
                                 <div class="svg_container">
-                                    <img src="./images/covid_19_dataset.svg" width="100%"></img>
-                                    <p class="figure_text">Figure 2. Preprocessing</p>
+                                    <img src="./images/text_pipeline.svg" width="100%"></img>
+                                    <p class="figure_text">Figure 2. Text Processing Pipeline</p>
                                 </div>
                             </span>
 
@@ -245,6 +251,10 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
+                    <figure style="width: 100%;">
+                        <img src="./images/bert_model.ppm" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
+                        <caption><p style="text-align: center;">Architecture of RoBERTa and BERT.</p></caption>
+                    </figure>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -834,80 +844,108 @@
                     </div>
                     <!-- end row -->
 
-                    <div class="row">
+                    <h4 id="line5_1">Analysis 1: General Sentiment Trend Against Major Events</h4>
+                    <p>Below is the daily average sentiment score from March 19 to June 1. </p>
+                    <figure style="padding-bottom: 6px;">
+                        <img src="./images/main_pred.jpg" alt="time series sentiment" width="100%">
+                        <figcaption style="font-size: smaller; line-height: 20px; border: 1px solid; padding: 10px; box-shadow: 5px 10px #888888;">
+                            <b style="color: red;">[1]</b> (March 21) China administered its first clinical trials of coronavirus vaccines to volunteers, according to local media reports. <br>
+                            <b style="color: red;">[2]</b> (March 22) President Trump announced that he would activate the federal National Guard to assist Washington, California and New York, three of the states hit hardest by the pandemic. <br>
+                            <b style="color: red;">[3]</b> (March 26) The Senate passed a massive $2 trillion stimulus package designed to ease the economic blow from the coronavirus pandemic.<br>
+                            <b style="color: red;">[4]</b> (March 28) The Centers for Disease Control and Prevention issued a travel advisory for New York, New Jersey and Connecticut, asking residents to refrain from non-essential travel for 14 days. <br>
+                            <b style="color: red;">[5]</b> (March 29) The global death toll from the coronavirus surpassed 30,000 deaths, according to Johns Hopkins University. AND President Trump extended his administration's guidelines on social distancing until April 30. <br>
+                            <b style="color: red;">[6]</b> (April 6) The coronavirus death toll in the U.S. surged past 10,000. <br>
+                            <b style="color: red;">[7]</b> (April 9) Second coronavirus vaccine trial began in the U.S.  AND California saw its first daily decrease in intensive care hospitalizations during the coronavirus outbreak, in addition to declines in the rate of all virus hospitalizations. <br>
+                            <b style="color: red;">[8]</b> (April 23) President Donald Trump suggested exploring disinfectants as a possible treatment for COVID-19 infections — an extremely dangerous proposition that could kill people, medical experts warn. <br>
+                            <b style="color: red;">[9]</b> (May 1) The Food and Drug Administration granted emergency use authorization for remdesivir, the drug that has shown promise in early clinical trials to help people with severe COVID-19.<br>
+                            <b style="color: red;">[10]</b> (May 12) Dr. Anthony Fauci and other top Trump administration officials testified at a public Senate hearing about the coronavirus response and plans for people to return to work and school. Testifying by videoconference, Fauci warned of serious consequences if governors reopen state economies prematurely.<br>
+                            <b style="color: red;">[11]</b> (May 22) An experimental coronavirus vaccine under development at the University of Oxford progressed to advanced stages of human trials. 
+                        </figcaption>
+                    </figure>
+                    <p>
+                        We confirm that our model outputs sensible results. Firstly, the low average of 
+                        predicted sentiment scores after May 25th (as marked with orange asteroid) can be 
+                        explained by the period of nation-wide protest eruptions after the unfortunate death 
+                        of George Floyd. In addition, on some ascending and descending trends of the sentiment
+                         scores, headlines of the corresponding dates can be found to match the trends. 
+                    </p>
 
-                        <div class="col-md-12">
-                            <p>Lorem the It is a long established fact that a reader will be distracted by the readable
-                                content of a page when looking at its layout. The point of using Lorem Ipsum is that it
-                                has a more-or-less normal distribution of letters, as opposed to using 'Content here,
-                                content here', making it look like readable English. long established fact that a reader
-                                will be distracted by the readable content of a page when looking at its layout. The
-                                point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-                                as opposed to using 'Content here, content here', making it look like readable
-                                English.</p>
-                        </div>
+                    <h4 id="line5_2">Analysis 2: Cross-Group Comparisons</h4>
 
-                        <div class="col-md-4">
-                            <a href="upload/thumbnail.png" data-rel="prettyPhoto"><img src="images/upload/thumbnail.png"
-                                                                                       alt=""
-                                                                                       class="img-responsive img-thumbnail"></a>
-                            <h4 id="line5_1">WordPress Blog Page - <a href="#top">#top</a></h4>
-                            <ul>
-                                <li><strong>Step 1</strong> - Lorem the It is a long established fact that a reader ease
-                                    read more about WordPress here.
-                                </li>
-                                <li><strong>Step 2</strong> - Lorem the It is a long established fact that a reader will
-                                    be distracted.. Please read more about WordPress here.
-                                </li>
-                                <li><strong>Step 3</strong> - Lorem the It is a long established fact that a read.</li>
-                            </ul>
-                        </div>
-                        <!-- end col -->
-
-                        <div class="col-md-4">
-                            <a href="upload/thumbnail.png" data-rel="prettyPhoto"><img src="images/upload/thumbnail.png"
-                                                                                       alt=""
-                                                                                       class="img-responsive img-thumbnail"></a>
-                            <h4 id="line5_2">Blog Post Sections - <a href="#top">#top</a></h4>
-                            <p>Lorem the It is a long established fact that a reader will be distracted.. Please read
-                                more about WordPress here.</p>
-                            <ul>
-                                <li><strong>Step 1</strong> - Lorem the It is a long established fact that a reader ease
-                                    read more about WordPress here.
-                                </li>
-                                <li><strong>Step 2</strong> - Lorem the It is a long established fact that a reader will
-                                    be distracted.. Please read more about WordPress here.
-                                </li>
-                                <li><strong>Step 3</strong> - Lorem the It is a long established fact that a read.</li>
-                            </ul>
-                        </div>
-                        <!-- end col -->
-
-                        <div class="col-md-4">
-                            <a href="upload/thumbnail.png" data-rel="prettyPhoto"><img src="images/upload/thumbnail.png"
-                                                                                       alt=""
-                                                                                       class="img-responsive img-thumbnail"></a>
-                            <h4 id="line5_3">Create Blog Gallery - <a href="#top">#top</a></h4>
-                            <p>Lorem the It is a long established fact that a reader will be distracted.. Please read
-                                more about WordPress here.</p>
-                            <ul>
-                                <li><strong>Step 1</strong> - Lorem the It is a long established fact that a reader ease
-                                    read more about WordPress here.
-                                </li>
-                                <li><strong>Step 2</strong> - Lorem the It is a long established fact that a reader will
-                                    be distracted.. Please read more about WordPress here.
-                                </li>
-                                <li><strong>Step 3</strong> - Lorem the It is a long established fact that a read.</li>
-                            </ul>
-                        </div>
-                        <!-- end col -->
-
+                    <div>
+                        <div>
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/01.png" alt="six comparisons" style="width:100%">
+                            </div>
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/02.png" alt="six comparisons" style="width:100%">
+                            </div>
+                        </div> 
+                        <div>
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/03.png" alt="six comparisons" style="width:100%">
+                            </div>
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/04.png" alt="six comparisons" style="width:100%">
+                            </div>
+                        </div> 
+                        <div>
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/05.png" alt="six comparisons" style="width:100%">
+                            </div>
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/06.png" alt="six comparisons" style="width:100%">
+                            </div>
+                            <br><br>
+                        </div>  
+                        <figure style="height: 800px;">
+                            <caption></caption>
+                        </figure>               
                     </div>
-                    <!-- end row -->
 
+                    <p>
+                        We plotted the sentiment scores against different groups in our dataset, e.g., different 
+                        ranges of retweet counts, or whether the user of the tweet has the default profile background 
+                        image. There are several discoveries we found from the figures. Firstly, the positive sentiment
+                         is very rare among the COVID-19 topic compared to the other two sentiments, which is clearly 
+                         reasonable. Secondly, more than 80 percent of the popular tweets (ones that had been retweeted 
+                         more than 20k times) have negative sentiment; tweets that were published by most-followed twitter 
+                         users (who have 20k to 50k followers) also have more than 80% of the negative sentiment. 
+                         This indicates that celebrities favor bad news in this pandemic, and bad news is more likely to 
+                         draw people’s attention. Furthermore, accounts that were created the earliest (in 2006) or had issued 
+                         the least tweets (< 5000) are inclined to be more positive than other users. 
+                    </p>
+                    <p>
+                        However, in contrast to our hypothesis, whether a username contains emoji as well as whether a
+                         user has the default profile page do not appear to influence the sentiment scores.
+                    </p>
+
+                    <h4 id="line5_3">Model Limitations and Further Discussions</h4>
+                    <p>
+                        By supplying our model with tweet text coded by ourselves, the model generally produces 
+                        reasonable sentiment prediction results. That being said, there is still room for improvement. 
+                        In particular, the model is not robust when it encounters very short text input. More deep 
+                        learning tricks can be used to boost the performance, such as slanted triangular learning rates.
+                    </p>
+                    <p>
+                        Due to the query limits of Twitter API, we could only access a relatively small amount of 
+                        COVID-19 related tweets in our study. By choosing a subsample of tweets from each date, we 
+                        hoped to get samples that represent the population well. However, samples are ultimately not 
+                        the population. If RoBERTa can be fine-tuned on a vast amount of tweet data, we expect it to 
+                        get much higher accuracy on the task.
+                    </p>
+                    <p>
+                        In light of COVID-19, there are countless new stories happening each day, with 
+                        generally more negative than positive news reported. In fact, a hodgepodge of positive 
+                        and negative events can all together affect people’s expression. Therefore, instead of 
+                        matching the trends of sentiment scores with breaking news, it might be a better idea to focus 
+                        more on extracting the news that people are actually discussing.
+                    </p>
                 </section>
                 <hr>
                 <!-- end section -->
+
+    
 
                 <section id="line6" class="section">
 
@@ -921,16 +959,18 @@
                     <p>
                         [1] Duong, Viet & Pham, Phu & Yang, Tongyu & Wang, Yu & Luo, Jiebo. (2020). The Ivory Tower
                         Lost: How College Students Respond Differently than the General Public to the COVID-19 Pandemic.
+                    </p>
+                    <p>
                         [2] Liu, Yinhan & Ott, Myle & Goyal, Naman & Du, Jingfei & Joshi, Mandar & Chen, Danqi & Levy,
                         Omer & Lewis, Mike & Zettlemoyer, Luke & Stoyanov, Veselin. (2019). RoBERTa: A Robustly
                         Optimized BERT Pretraining Approach.
+                    </p>
                         [3] Devlin, Jacob & Chang, Ming-Wei & Lee, Kenton & Toutanova, Kristina. (2018). BERT:
                         Pre-training of Deep Bidirectional Transformers for Language Understanding.
-                        This site was based on <a href="http://surjithctly.github.io/documentation-html-template/">Documentation
+                    </p>
+                    <p>
+                        [4] This site was based on <a href="http://surjithctly.github.io/documentation-html-template/">Documentation
                         HTML Template. </a><br>
-                        COVID-19 related news timeline based on information on <a
-                            href="https://www.nbcnews.com/health/health-news/coronavirus-timeline-tracking-critical-moments-covid-19-n1154341">this
-                        site. </a><br>
                     </p>
 
                     <h4>Data Source</h4>
@@ -951,13 +991,21 @@
                     </div>
                     <div class="dataIntro">
                         <ul>
-                            <li>Our COVID-19 data comes from Covid-19 Twitter chatter dataset for scientific
+                            <li>Covid-19 Twitter chatter dataset for scientific
                                 use</a></li>
                             <li><strong>Author : </strong>Georgia State University's Panacea Lab, Guanyu Wang, Jingyuan
                                 Yu, Tuo Liu, Yuning Ding, Elena Tutubalina
                             </li>
                             <li><strong>Version : </strong>12.0</li>
                             <li>Dataset can be accessed <a href="http://www.panacealab.org/covid19/">here</a></li>
+                        </ul>
+                    </div>
+                    <div class="dataIntro">
+                        <ul>
+                            <li>Coronavirus timeline: Tracking the critical moments of COVID-19</a></li>
+                            <li><strong>Author: </strong> NBC News
+                            </li>
+                            <li>Dataset can be accessed <a href="https://www.nbcnews.com/health/health-news/coronavirus-timeline-tracking-critical-moments-covid-19-n1154341">here</a></li>
                         </ul>
                     </div>
                     <!-- end col -->
@@ -976,11 +1024,11 @@
                     </div>
                     <!-- end row -->
                     <p>
-                        We are a group of third-year undergraduate students at the University of Toronto: <br><br>
+                        Built with &#x2764; by  
                         <a href="https://yuchenwyc.github.io/">Yuchen Wang</a>,
                         <a href="http://www.tingfengx.com/">Tingfeng Xia</a>,
-                        Gongyi Shi,
-                        Chen Ding
+                        <a href="http://github.com/koichishi/">Gongyi Shi</a>, and
+                        <a href="http://github.com/ZoraDing212/">Chen Ding</a> &nbsp; <a href="https://github.com/tingfengx/Team-ZeroLoss">(Team ZeroLoss)</a>
                     </p>
 
                 </section>
