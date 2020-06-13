@@ -33,7 +33,6 @@ elif socket.gethostname() == "q":
 os.makedirs(script_dir, exist_ok=True)
 os.makedirs(logs_dir, exist_ok=True)
 
-
 batch_sizes = [64, 128]
 
 learning_rates = [1e-3, 3e-4, 1e-4, 3e-5, 1e-5]
@@ -45,8 +44,6 @@ b1s = [0.9, 0.8]
 b2s = [0.999, 0.888]
 
 weight_decays = [0.01, 0.1, 0.2]
-
-
 
 with open("run_all.sh", "w") as allf:
     allf.write(f"cd {logs_dir}\n")
@@ -71,5 +68,6 @@ with open("run_all.sh", "w") as allf:
                                 f.write(f"cd {ROOT}\n")
                                 f.write(f"source $HOME/anaconda3/etc/profile.d/conda.sh\n")
                                 f.write(f"conda activate {ENV}\n")
-                                f.write(f"python model.py -bs {bs} -lr {lr} -do {do} -b1 {b1} -b2 {b2} -wd {wd} -sn {job}\n")
+                                f.write(
+                                    f"python model.py -bs {bs} -lr {lr} -do {do} -b1 {b1} -b2 {b2} -wd {wd} -sn {job}\n")
                             allf.write(f"sbatch {script_dir}/{job}.job\n")

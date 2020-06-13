@@ -25,38 +25,39 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 NUM_EVALS = 1
 output_filename = "./search_result/search.csv"
 
+
 def run_model(space):
     args = {'batch_size': 128,
-    'lr': space['lr'],
-    'hidden_dim': 128,
-    'n_layers': space['n_layers'],
-    'bidirectional': True,
-    'dropout': space['dropout'],
-    'n_epochs': 20,
-    'b1': space['b1'],
-    'b2': space['b2'],
-    'weight_decay': space['weight_decay'],
-    'weight': torch.tensor([0.1568, 0.4639, 0.3793], dtype=torch.float32)
-    }
+            'lr': space['lr'],
+            'hidden_dim': 128,
+            'n_layers': space['n_layers'],
+            'bidirectional': True,
+            'dropout': space['dropout'],
+            'n_epochs': 20,
+            'b1': space['b1'],
+            'b2': space['b2'],
+            'weight_decay': space['weight_decay'],
+            'weight': torch.tensor([0.1568, 0.4639, 0.3793], dtype=torch.float32)
+            }
     train_loader = torch.load("train_loader.pt")
     valid_loader = torch.load("valid_loader.pt")
     test_loader = torch.load("test_loader.pt")
-    
-    opt_name = '_'.join(['b1_'+str(args['b1']), 'b2_'+str(args['b2']), 'lr'+str(args['lr']),
-                         'drop'+str(args['dropout']), 'l2_'+str(args['weight_decay'])])
-    
+
+    opt_name = '_'.join(['b1_' + str(args['b1']), 'b2_' + str(args['b2']), 'lr' + str(args['lr']),
+                         'drop' + str(args['dropout']), 'l2_' + str(args['weight_decay'])])
+
     bert = DistilBertModel.from_pretrained('distilbert-base-uncased')
     model = BERTGRUSentiment(bert,
-                         args['hidden_dim'],
-                         3,
-                         args['n_layers'],
-                         args['bidirectional'],
-                         args['dropout']).to(device)
-    for name, param in model.named_parameters():                
+                             args['hidden_dim'],
+                             3,
+                             args['n_layers'],
+                             args['bidirectional'],
+                             args['dropout']).to(device)
+    for name, param in model.named_parameters():
         if name.startswith('bert'):
             param.requires_grad = False
-    optimizer = optim.Adam(model.parameters(), 
-                           lr=args['lr'], 
+    optimizer = optim.Adam(model.parameters(),
+                           lr=args['lr'],
                            betas=(args["b1"], args["b2"]),
                            weight_decay=args["weight_decay"])
     criterion = nn.CrossEntropyLoss(weight=args['weight']).to(device)
@@ -87,7 +88,6 @@ def run_model(space):
             best_valid_acc = valid_acc
             best_valid_f1 = valid_f1
 
-
     model_dict = {
         "v_loss": best_valid_loss,
         "v_acc": best_valid_acc,
@@ -95,6 +95,7 @@ def run_model(space):
         "name": opt_name
     }
     return model_dict
+
 
 if __name__ == "__main__":
     # hyper parameter search space
@@ -112,7 +113,7 @@ if __name__ == "__main__":
     while evals_inc <= NUM_EVALS:
         best = fmin(fn=run_model, space=space, algo=tpe.suggest, max_evals=evals_inc,
                     trials=trials)
-        results  = []
+        results = []
         for trial in trails.trails:
             results.append(trail['result'])
         keys = results[0].keys()
@@ -120,7 +121,7 @@ if __name__ == "__main__":
             dict_writer = csv.DictWriter(output_filename, keys)
             dict_writer.writeheader()
             dict_writer.writerows(results)
-            
+
         if evals_inc == NUM_EVALS:
             break
-        evals_inc = min(NUM_EVALS, evals_inc+5)
+        evals_inc = min(NUM_EVALS, evals_inc + 5)
