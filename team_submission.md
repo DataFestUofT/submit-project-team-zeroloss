@@ -11,6 +11,6 @@ ASA DataFest COVID-19 Virtual Challenge @UofT
 
 ## Submission Files
 
-An app was created, and is deployed at https://tingfengx.com/Team-ZeroLoss
+* An app was created, and is deployed [here](https://tingfengx.com/Team-ZeroLoss)
 
-A video/write-up (select one) was created, and is available in these files XXX (add links/file names as appropriate).
+* A write-up was created, and is available [here](https://tingfengx.github.io/Team-ZeroLoss/writeup/writeup.pdf)
