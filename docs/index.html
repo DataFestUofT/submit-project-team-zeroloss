@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>
+<html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <title> Explore how the U.S. general public responds to breaking news in COVID-19 pandemic on Twitter</title>
+
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/stroke.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/prettyPhoto.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="js/syntax-highlighter/styles/shCore.css" media="all">
+    <link rel="stylesheet" type="text/css" href="js/syntax-highlighter/styles/shThemeRDark.css" media="all">
+
+    <!-- CUSTOM -->
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="wordart" data-wordart-src="">
+        <script src="js/word_cloud.js"></script>
+    </div>
+
+    <div id="word_cloud_explanation">(Top frequency negative predicted sentiment words in our
+        COVID-19 dataset)
+    </div>
+
+    <div id="wrapper">
+
+        <div class="container">
+
+            <section id="top" class="section">
+                <div class="row">
+                    <div class="col-md-14">
+                        <div class="big-title text-center">
+                            <h1 class="title" style="color:white;">Explore how the U.S. general public responds to breaking news
+                                in
+                                COVID-19 pandemic on Twitter</h1>
+                            <p class="lead" style="color:white;">Team ZeroLoss | ASA DataFest 2020 @UofT</p>
+                        </div>
+                        <!-- end title -->
+                    </div>
+                    <!-- end 12 -->
+                </div>
+                <!-- end row -->
+            </section>
+            <!-- end section -->
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <nav class="docs-sidebar" data-spy="affix" data-offset-top="970" data-offset-bottom="200"
+                        role="navigation">
+                        <ul class="nav">
+                            <li><a href="#line1">Introduction</a></li>
+                            <li><a href="#line2">Data and Preprocessing</a>
+                                <ul class="nav">
+                                    <li><a href="#line2_1">Datasets</a></li>
+                                    <li><a href="#line2_2">Preprocessing</a></li>
+                                    <li><a href="#line2_3">Text Processing</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#line3">Model</a>
+                                <ul class="nav">
+                                    <li><a href="#line3_1">the RoBERTa Model</a></li>
+                                    <li><a href="#line3_2">Fine-tuning RoBERTa</a></li>
+                                    <li><a href="#line3_3">Performance</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#line4">Data Exploration</a></li>
+                            <li><a href="#line5">Data Analysis with the Model</a>
+                                <ul class="nav">
+                                    <li><a href="#line5_1">Analysis 1: Sentiment Scores against Dates</a>
+                                    </li>
+                                    <li><a href="#line5_2">Analysis 2: Cross-Group Comparisons</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#line6">Discussions</a></li>
+                            <li><a href="#line7">References</a></li>
+                            <li><a href="#line8">Authors</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-9">
+
+                    <section id="line1" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Introduction <a></a></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="barContent">Coronavirus disease 2019 (COVID-19), caused by severe acute
+                                    respiratory syndrome coronavirus 2 (SARS-CoV-2), proliferated in scale and severity
+                                    and officially declared a pandemic on March 11th, 2020. In the United States, the
+                                    country has the highest number of confirmed cases. The government has announced many
+                                    policies, including shutting down schools and workplaces and promoting social
+                                    distancing, advising people to wear masks in public areas. The U.S. President Donald
+                                    Trump also broadcasts his opinions towards the pandemic, whose words might have an
+                                    impact on the public's attitude.
+
+                                    In this study, we attempt to analyze how the overall sentiment of COVID-19 related
+                                    tweets changes with heated news by using natural language processing tools. </p>
+
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </section>
+                    <hr>
+                    <!-- end section -->
+
+                    <section id="line2" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Data and Preprocessing <a></a></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 id="line2_1">Datasets</h4>
+                                <p class="barContent">There are two data sources that we utilized in this project. We do
+                                    analysis with our model using the processed selection of COVID-19 Twitter dataset
+                                    (Release 12.0). To train and evaluate our model, we used SemEval-2017 Task 4A
+                                    dataset.
+                            </div>
+                            <div class="col-md-12">
+                                <span class="svg_parent_container">
+                                    <div class="svg_container">
+                                        <img src="./images/covid_19_dataset.svg" width="100%"></img>
+                                        <p class="figure_text">Figure 1. Preprocessing</p>
+                                    </div>
+                                    <div class="svg_container">
+                                        <img src="./images/text_pipeline.svg" width="100%"></img>
+                                        <p class="figure_text">Figure 2. Text Processing Pipeline</p>
+                                    </div>
+                                </span>
+
+                                <h4 id="line2_2">Preprocessing (Getting Actual Tweets)</h4>
+                                <p class="barContent">
+                                    The raw data from the COVID-19 Twitter dataset (Release 12.0) contains a total of
+                                    331M tweet ID entries. As shown in Figure 1, we randomly sampled 10,000 tweet IDs
+                                    for each day from March 19th to May 30th (74 consecutive days). By querying the
+                                    twitter server, we hydrated the selected tweet ids to get the text and associated
+                                    user information. (“Hydrate a tweet ID” means to get the tweet text and user
+                                    information for the tweet specified by the tweet ID). We then filtered out all
+                                    tweets from users whose location information implies they are in the states.
+                                </p>
+                                <h4 id="line2_3">Text Processing Pipeline</h4>
+                                <p class="barContent">
+                                    To boost our model’s performance, we preprocessed the tweet texts in the two
+                                    datasets using a pipeline, as shown in Figure 2. To be more specific, we first
+                                    expand emojis and abbreviated forms (e.g. “we’re” into “we are”). The second step is
+                                    to remove URLs present and replace “@<username>” with a special token “[someone]”.
+                                        These two steps aim to make sure our RoBERTa based embedding can comprehend as
+                                        much useful information as possible.
+                                </p>
+                            </div>
+                            <!-- end col -->
+                        </div>
+
+                    </section>
+                    <hr>
+                    <!-- end section -->
+
+                    <section id="line3" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Model<a></a></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                        <figure style="width: 100%;">
+                            <img src="./images/bert_model.ppm"
+                                style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
+                            <caption>
+                                <p style="text-align: center;">Architecture of RoBERTa and BERT.</p>
+                            </caption>
+                        </figure>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 id="line3_1">the RoBERTa Model</h4>
+                                <p class="barContent">The RoBERTa (Robustly Optimized BERT Pretraining) model was
+                                    proposed
+                                    by Yinhan Liu et al in 2019. It builds on BERT (Bidirectional Encoder
+                                    Representations
+                                    from Transformers), which is a language representation model designed to pre-train
+                                    deep
+                                    bidirectional representations from unlabeled text. As a result, the pre-trained BERT
+                                    model can be fine-tuned with just one additional output layer to create
+                                    state-of-the-art
+                                    models for a wide range of tasks.
+                                </p>
+                                <!-- <div class="row"> -->
+                                <!-- <div class="col-md-8 col-md-offset-2">
+                                <div class="media">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OR0wfP2FD3c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div> -->
+                            </div>
+                            <div class="col-md-12">
+                                <h4 id="line3_2">Fine-tuning RoBERTa</h4>
+
+                                <p class="barContent">
+                                    We splitted the SemEval-2017 Task 4A Dataset into train, validation and test sets.
+                                    The
+                                    statistics is the following:
+                                </p>
+
+                                <!--Table-->
+                                <style type="text/css">
+                                    .tg {
+                                        border-collapse: collapse;
+                                        border-color: black;
+                                        border-spacing: 0;
+                                        border-style: solid;
+                                        border-width: 1px;
+                                        margin: 0px auto;
+                                    }
+
+                                    .tg td {
+                                        border-style: solid;
+                                        border-width: 0px;
+                                        font-family: Arial, sans-serif;
+                                        font-size: 14px;
+                                        overflow: hidden;
+                                        padding: 5px 8px;
+                                        word-break: normal;
+                                    }
+
+                                    .tg th {
+                                        border-style: solid;
+                                        border-width: 0px;
+                                        font-family: Arial, sans-serif;
+                                        font-size: 14px;
+                                        font-weight: normal;
+                                        overflow: hidden;
+                                        padding: 5px 8px;
+                                        word-break: normal;
+                                    }
+
+                                    .tg .tg-jplp {
+                                        border-color: #9b9b9b;
+                                        color: #333333;
+                                        font-family: Arial, Helvetica, sans-serif !important;
+                                        ;
+                                        font-size: 14px;
+                                        font-weight: bold;
+                                        text-align: center;
+                                        vertical-align: top
+                                    }
+
+                                    .tg .tg-b9pq {
+                                        border-color: #9b9b9b;
+                                        color: #333333;
+                                        font-family: Arial, Helvetica, sans-serif !important;
+                                        ;
+                                        font-size: 14px;
+                                        text-align: center;
+                                        vertical-align: top
+                                    }
+
+                                    .tg-sort-header::-moz-selection {
+                                        background: 0 0
+                                    }
+
+                                    .tg-sort-header::selection {
+                                        background: 0 0
+                                    }
+
+                                    .tg-sort-header {
+                                        cursor: pointer
+                                    }
+
+                                    .tg-sort-header:after {
+                                        content: '';
+                                        float: right;
+                                        margin-top: 7px;
+                                        border-width: 0 5px 5px;
+                                        border-style: solid;
+                                        border-color: #404040 transparent;
+                                        visibility: hidden
+                                    }
+
+                                    .tg-sort-header:hover:after {
+                                        visibility: visible
+                                    }
+
+                                    .tg-sort-asc:after,
+                                    .tg-sort-asc:hover:after,
+                                    .tg-sort-desc:after {
+                                        visibility: visible;
+                                        opacity: .4
+                                    }
+
+                                    .tg-sort-desc:after {
+                                        border-bottom: none;
+                                        border-width: 5px 5px 0
+                                    }
+
+                                    @media screen and (max-width: 767px) {
+                                        .tg {
+                                            width: auto !important;
+                                        }
+
+                                        .tg col {
+                                            width: auto !important;
+                                        }
+
+                                        .tg-wrap {
+                                            overflow-x: auto;
+                                            -webkit-overflow-scrolling: touch;
+                                            margin: auto 0px;
+                                        }
+                                    }
+                                </style>
+                                <div class="tg-wrap">
+                                    <table id="tg-h5JkP" class="tg"
+                                        style="table-layout: fixed; width: 510px; line-height: 1.1;">
+                                        <colgroup>
+                                            <col style="width: 110px">
+                                            <col style="width: 110px">
+                                            <col style="width: 110px">
+                                            <col style="width: 110px">
+                                            <col style="width: 110px">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th class="tg-jplp">Dataset</th>
+                                                <th class="tg-jplp">Negative</th>
+                                                <th class="tg-jplp">Neutral</th>
+                                                <th class="tg-jplp">Positive</th>
+                                                <th class="tg-jplp">Total</th>
+                                            </tr>
+
+                                        <tbody>
+                                            <tr>
+                                                <td class="tg-jplp">Train</td>
+                                                <td class="tg-b9pq">4856</td>
+                                                <td class="tg-b9pq">14368</td>
+                                                <td class="tg-b9pq">11689</td>
+                                                <td class="tg-b9pq">30913 (70%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tg-jplp">Validation</td>
+                                                <td class="tg-b9pq">1401</td>
+                                                <td class="tg-b9pq">4045</td>
+                                                <td class="tg-b9pq">3386</td>
+                                                <td class="tg-b9pq">8832 (20%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tg-jplp">Test</td>
+                                                <td class="tg-b9pq">669</td>
+                                                <td class="tg-b9pq">2072</td>
+                                                <td class="tg-b9pq">1675</td>
+                                                <td class="tg-b9pq">4416 (10%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tg-jplp">Total</td>
+                                                <td class="tg-b9pq">6926</td>
+                                                <td class="tg-b9pq">20485</td>
+                                                <td class="tg-b9pq">16750</td>
+                                                <td class="tg-b9pq">44161</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <script charset="utf-8">var TGSort = window.TGSort || function (n) {
+                                        "use strict";
+
+                                        function r(n) {
+                                            return n ? n.length : 0
+                                        }
+
+                                        function t(n, t, e, o = 0) {
+                                            for (e = r(n); o < e; ++o) t(n[o], o)
+                                        }
+
+                                        function e(n) {
+                                            return n.split("").reverse().join("")
+                                        }
+
+                                        function o(n) {
+                                            var e = n[0];
+                                            return t(n, function (n) {
+                                                for (; !n.startsWith(e);) e = e.substring(0, r(e) - 1)
+                                            }), r(e)
+                                        }
+
+                                        function u(n, r, e = []) {
+                                            return t(n, function (n) {
+                                                r(n) && e.push(n)
+                                            }), e
+                                        }
+
+                                        var a = parseFloat;
+
+                                        function i(n, r) {
+                                            return function (t) {
+                                                var e = "";
+                                                return t.replace(n, function (n, t, o) {
+                                                    return e = t.replace(r, "") + "." + (o || "").substring(1)
+                                                }), a(e)
+                                            }
+                                        }
+
+                                        var s = i(/^(?:\s*)([+-]?(?:\d+)(?:,\d{3})*)(\.\d*)?$/g, /,/g),
+                                            c = i(/^(?:\s*)([+-]?(?:\d+)(?:\.\d{3})*)(,\d*)?$/g, /\./g);
+
+                                        function f(n) {
+                                            var t = a(n);
+                                            return !isNaN(t) && r("" + t) + 1 >= r(n) ? t : NaN
+                                        }
+
+                                        function d(n) {
+                                            var e = [], o = n;
+                                            return t([f, s, c], function (u) {
+                                                var a = [], i = [];
+                                                t(n, function (n, r) {
+                                                    r = u(n), a.push(r), r || i.push(n)
+                                                }), r(i) < r(o) && (o = i, e = a)
+                                            }), r(u(o, function (n) {
+                                                return n == o[0]
+                                            })) == r(o) ? e : []
+                                        }
+
+                                        function v(n) {
+                                            if ("TABLE" == n.nodeName) {
+                                                for (var a = function (r) {
+                                                    var e, o, u = [], a = [];
+                                                    return function n(r, e) {
+                                                        e(r), t(r.childNodes, function (r) {
+                                                            n(r, e)
+                                                        })
+                                                    }(n, function (n) {
+                                                        "TR" == (o = n.nodeName) ? (e = [], u.push(e), a.push(n)) : "TD" != o && "TH" != o || e.push(n)
+                                                    }), [u, a]
+                                                }(), i = a[0], s = a[1], c = r(i), f = c > 1 && r(i[0]) < r(i[1]) ? 1 : 0, v = f + 1, p = i[f], h = r(p), l = [], g = [], N = [], m = v; m < c; ++m) {
+                                                    for (var T = 0; T < h; ++T) {
+                                                        r(g) < h && g.push([]);
+                                                        var C = i[m][T], L = C.textContent || C.innerText || "";
+                                                        g[T].push(L.trim())
+                                                    }
+                                                    N.push(m - v)
+                                                }
+                                                t(p, function (n, t) {
+                                                    l[t] = 0;
+                                                    var a = n.classList;
+                                                    a.add("tg-sort-header"), n.addEventListener("click", function () {
+                                                        var n = l[t];
+                                                        !function () {
+                                                            for (var n = 0; n < h; ++n) {
+                                                                var r = p[n].classList;
+                                                                r.remove("tg-sort-asc"), r.remove("tg-sort-desc"), l[n] = 0
+                                                            }
+                                                        }(), (n = 1 == n ? -1 : +!n) && a.add(n > 0 ? "tg-sort-asc" : "tg-sort-desc"), l[t] = n;
+                                                        var i, f = g[t], m = function (r, t) {
+                                                            return n * f[r].localeCompare(f[t]) || n * (r - t)
+                                                        }, T = function (n) {
+                                                            var t = d(n);
+                                                            if (!r(t)) {
+                                                                var u = o(n), a = o(n.map(e));
+                                                                t = d(n.map(function (n) {
+                                                                    return n.substring(u, r(n) - a)
+                                                                }))
+                                                            }
+                                                            return t
+                                                        }(f);
+                                                        (r(T) || r(T = r(u(i = f.map(Date.parse), isNaN)) ? [] : i)) && (m = function (r, t) {
+                                                            var e = T[r], o = T[t], u = isNaN(e), a = isNaN(o);
+                                                            return u && a ? 0 : u ? -n : a ? n : e > o ? n : e < o ? -n : n * (r - t)
+                                                        });
+                                                        var C, L = N.slice();
+                                                        L.sort(m);
+                                                        for (var E = v; E < c; ++E) (C = s[E].parentNode).removeChild(s[E]);
+                                                        for (E = v; E < c; ++E) C.appendChild(s[v + L[E - v]])
+                                                    })
+                                                })
+                                            }
+                                        }
+
+                                        n.addEventListener("DOMContentLoaded", function () {
+                                            for (var t = n.getElementsByClassName("tg"), e = 0; e < r(t); ++e) try {
+                                                v(t[e])
+                                            } catch (n) {
+                                            }
+                                        })
+                                    }(document)</script>
+                                <!--Table end-->
+                                <!--end Table-->
+                                <p class="barContent">
+                                    <br> In our sentiment analysis task, we utilize the transformers library by <a
+                                        href="https://huggingface.co/">huggingface</a>, which includes a RoBERTa model
+                                    base
+                                    in Pytorch. On top of the RoBERTa base, we trained two layers of GRU (Gated
+                                    Recurrent
+                                    Unit) to predict the probability for three sentiment classes: 0 for “Negative”, 1
+                                    for
+                                    “Neutral”
+                                    and 2 for“Positive”, with the cross-entropy loss function minimized on Stochastic
+                                    Gradient Descent Optimizer. We train the model on the train set and select the model
+                                    with the lowest validation loss (the value of the loss function on the validation
+                                    set).
+
+                                </p>
+                                <h4 id="line3_3"> Performance</h4>
+                                <p class="barContent">
+                                    Our final model has the following performance, evaluated using the validation set
+                                    and
+                                    the test set:
+                                </p>
+
+                                <!--Table-->
+                                <style type="text/css">
+                                    .tg {
+                                        border-collapse: collapse;
+                                        border-color: black;
+                                        border-spacing: 0;
+                                        border-style: solid;
+                                        border-width: 1px;
+                                        margin: 0px auto;
+                                    }
+
+                                    .tg td {
+                                        border-style: solid;
+                                        border-width: 0px;
+                                        font-family: Arial, sans-serif;
+                                        font-size: 14px;
+                                        overflow: hidden;
+                                        padding: 10px 5px;
+                                        word-break: normal;
+                                    }
+
+                                    .tg th {
+                                        border-style: solid;
+                                        border-width: 0px;
+                                        font-family: Arial, sans-serif;
+                                        font-size: 14px;
+                                        font-weight: normal;
+                                        overflow: hidden;
+                                        padding: 10px 5px;
+                                        word-break: normal;
+                                    }
+
+                                    .tg .tg-baqh {
+                                        text-align: center;
+                                        vertical-align: top
+                                    }
+
+                                    .tg .tg-804w {
+                                        font-family: Arial, Helvetica, sans-serif !important;
+                                        ;
+                                        text-align: center;
+                                        vertical-align: top
+                                    }
+
+                                    .tg .tg-amwm {
+                                        font-weight: bold;
+                                        text-align: center;
+                                        vertical-align: top
+                                    }
+
+                                    @media screen and (max-width: 767px) {
+                                        .tg {
+                                            width: auto !important;
+                                        }
+
+                                        .tg col {
+                                            width: auto !important;
+                                        }
+
+                                        .tg-wrap {
+                                            overflow-x: auto;
+                                            -webkit-overflow-scrolling: touch;
+                                            margin: auto 0px;
+                                        }
+                                    }
+                                </style>
+                                <div class="tg-wrap">
+                                    <table class="tg" style="table-layout: fixed; width: 246px; line-height: 1.1;">
+                                        <colgroup>
+                                            <col style="width: 200px">
+                                            <col style="width: 200px">
+                                        </colgroup>
+                                        <tbody>
+                                            <tr>
+                                                <td class="tg-jplp">Metric</span></td>
+                                                <td class="tg-jplp">Value</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tg-jplp">Accuracy (validation)</td>
+                                                <td class="tg-b9pq">70.2%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tg-jplp">Macro F1 score (validation)</td>
+                                                <td class="tg-b9pq">69.1%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tg-jplp">Accuracy (test)</td>
+                                                <td class="tg-b9pq">69.7%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tg-jplp">Macro F1 score (test)</td>
+                                                <td class="tg-b9pq">68.7%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--end Table-->
+                            </div>
+                            <!-- end col -->
+                        </div>
+
+                    </section>
+                    <hr>
+                    <!-- end section -->
+
+                    <section id="line4" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Data Exploration<a></a></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                        <p class="barContent">
+                            We selected/created the following variables from the Twitter object that might be helpful
+                            for
+                            analysis: </p>
+                        <style type="text/css">
+                            .tg {
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                            }
+
+                            .tg td {
+                                border-color: #9b9b9b;
+                                border-style: solid;
+                                border-width: 1px;
+                                font-family: Arial, sans-serif;
+                                font-size: 14px;
+                                overflow: hidden;
+                                padding: 10px 5px;
+                                word-break: normal;
+                            }
+
+                            .tg th {
+                                border-color: #9b9b9b;
+                                border-style: solid;
+                                border-width: 1px;
+                                font-family: Arial, sans-serif;
+                                font-size: 14px;
+                                font-weight: normal;
+                                overflow: hidden;
+                                padding: 10px 5px;
+                                word-break: normal;
+                            }
+
+                            .tg .tg-ur59 {
+                                border-color: #9b9b9b;
+                                text-align: left;
+                                vertical-align: top
+                            }
+                        </style>
+                        <table class="tg" style="line-height: 1.2;">
+                            <thead>
+                                <tr>
+                                    <th class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Variable
+                                            Name</span>
+                                    </th>
+                                    <th class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Meaning</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">text</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">The
+                                            tweet text</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">retweet_count</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Number
+                                            of times this Tweet has been retweeted</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">favorite_count</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Indicates
+                                            approximately how many times this Tweet </span><br><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">has
+                                            been </span><a
+                                            href="https://developer.twitter.com/rest/reference/post/favorites/create"
+                                            target="_blank" rel="noopener noreferrer"><span
+                                                style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">liked</span></a><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">
+                                            by Twitter users.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">user.screen_name</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">The
+                                            screen name, handle, or alias that this user identifies </span><br><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">themselves
+                                            with.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">user.description</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">The
+                                            user-defined UTF-8 string describing their account.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">user.followers_count</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">The
+                                            number of followers this account currently has.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">user.created_at</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">The
+                                            year that the user account was created on twitter</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">user.statuses_count</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">The
+                                            number of Tweets (including retweets) issued by the user.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">user.default_profile</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">When
+                                            true, indicates that the user has not altered the theme</span><br><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">
+                                            or background of their user profile.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">date</span>
+                                    </td>
+                                    <td class="tg-ur59"><span
+                                            style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">The
+                                            date that the tweet is issued</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="barContent">
+                            Here are some of the variables visualized in histograms or pie charts:
+                        <p><img src="images/explore_combined.png" style="width: 80%;">
+
+                    </section>
+                    <hr>
+                    <!-- end section -->
+
+                    <section id="line5" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Data Analysis with the Model <a></a></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                        <p class="barContent">
+                            Recall that the predicted sentiment is represented by three integer scores: 0 for negative,
+                            1 for neutral, and 2 for positive. Using our model to predict a sentiment score for each of
+                            the tweet texts in our COVID-19 dataset, we can do various analyses and interpretations.</p>
+
+                        <h4 id="line5_1">Analysis 1: Sentiment Scores against Dates</h4>
+                        <figure style="padding-bottom: 6px;">
+                            <img src="./images/main_pred.jpg" alt="time series sentiment" width="100%">
+                            <figcaption
+                                style="font-size: smaller; line-height: 20px; border: 1px solid; padding: 10px; box-shadow: 5px 10px #888888;">
+                                <b style="color: red;">[1]</b> (March 21) China reported no new domestic cases in Wuhan
+                                for a third consecutive day. <br>
+                                <b style="color: red;">[2]</b> (March 22) President Trump announced that he would
+                                activate the federal National Guard to assist Washington, California and New York, three
+                                of the states hit hardest by the pandemic. <br>
+                                <b style="color: red;">[3]</b> (March 26) The Senate passed a massive $2 trillion
+                                stimulus package designed to ease the economic blow from the coronavirus pandemic.<br>
+                                <b style="color: red;">[4]</b> (March 28) The Centers for Disease Control and Prevention
+                                issued a travel advisory for New York, New Jersey and Connecticut, asking residents to
+                                refrain from non-essential travel for 14 days. <br>
+                                <b style="color: red;">[5]</b> (March 29) The global death toll from the coronavirus
+                                surpassed 30,000 deaths, according to Johns Hopkins University. AND President Trump
+                                extended his administration's guidelines on social distancing until April 30. <br>
+                                <b style="color: red;">[6]</b> (April 6) The coronavirus death toll in the U.S. surged
+                                past 10,000. <br>
+                                <b style="color: red;">[7]</b> (April 9) Second coronavirus vaccine trial began in the
+                                U.S. AND California saw its first daily decrease in intensive care hospitalizations
+                                during the coronavirus outbreak, in addition to declines in the rate of all virus
+                                hospitalizations. <br>
+                                <b style="color: red;">[8]</b> (April 23) President Donald Trump suggested exploring
+                                disinfectants as a possible treatment for COVID-19 infections — an extremely dangerous
+                                proposition that could kill people, medical experts warn. <br>
+                                <b style="color: red;">[9]</b> (May 1) The Food and Drug Administration granted
+                                emergency use authorization for remdesivir, the drug that has shown promise in early
+                                clinical trials to help people with severe COVID-19.<br>
+                                <b style="color: red;">[10]</b> (May 12) Dr. Anthony Fauci and other top Trump
+                                administration officials testified at a public Senate hearing about the coronavirus
+                                response and plans for people to return to work and school. Testifying by
+                                videoconference, Fauci warned of serious consequences if governors reopen state
+                                economies prematurely.<br>
+                                <b style="color: red;">[11]</b> (May 22) An experimental coronavirus vaccine under
+                                development at the University of Oxford progressed to advanced stages of human
+                                trials.<br>
+                                <b style="color: rgb(250, 135, 27);">[*]</b> (May 25 - June 1) Outbreak of George Floyd
+                                and Black Lives
+                                Matter protests.
+                            </figcaption>
+                        </figure>
+                        <p class="barContent" style="padding-top: 10px;">
+                            Above is a graph we built that shows changes in the daily average sentiment score from March
+                            19 to June 1. On some of the interesting peaks and valleys,
+                            we found headlines of the corresponding dates. <br><br>
+
+                            During the 74 days, the average score is consistently fluctuating between 0.65 and 1 (a
+                            higher score means overall a more positive attitude in tweets).
+                            On March 21, China reported no new domestic cases in Wuhan for a third consecutive day, and
+                            we can see a relatively positive sentiment of Twitter users in the U.S.
+                            The next day, the graph shows a fall of the score, while President Trump announced he would
+                            activate the federal National Guard to assist Washington,
+                            California and New York.
+                            On April 6, the coronavirus death toll in the U.S. surged past 10,000, and there is a sharp
+                            decrease in the scores.
+                            For another notable instance, there is a significant declining trend of feelings in people's
+                            expression after May 25, which matches the period of nation-wide George Floyd protest
+                            eruptions.
+                        </p>
+
+                        <h4 id="line5_2">Analysis 2: Cross-Group Comparisons</h4>
+
+
+                        <div class="two_iamge_row">
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/01.png" alt="six comparisons" style="width:100%">
+                            </div>
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/02.png" alt="six comparisons" style="width:100%">
+                            </div>
+                        </div>
+                        <div class="two_iamge_row">
+                            <div style="float: left; width: 50%; padding: 0px;">
+                                <img src="./images/6_comparisons/03.png" alt="six comparisons" style="width:100%">
+                            </div>
+                            <div style="float: left; width: 50%; padding: 0px; display: block;">
+                                <img src="./images/6_comparisons/04.png" alt="six comparisons" style="width:100%">
+                            </div>
+                        </div>
+                        <div class="two_iamge_row">
+                            <div style="float: left; width: 50%; padding: 0px;display: block;">
+                                <img src="./images/6_comparisons/05.png" alt="six comparisons" style="width:100%">
+                            </div>
+                            <div style="float: left; width: 50%; padding: 0px; display: block;">
+                                <img src="./images/6_comparisons/07.png" alt="six comparisons" style="width:100%">
+                            </div>
+                            <br><br>
+                        </div>
+
+
+                        <p class="barContent" style="padding-top: 10px;">
+                            We plotted the sentiment scores against different groups in our dataset, e.g., different
+                            ranges of retweet counts, or whether the user of the tweet has emoji in their username. 
+                            There are several discoveries we found from the figures. Firstly, the
+                            positive expression is infrequent among the COVID-19 related tweets compared to the other
+                            two sentiments. Secondly, more than 80 percent of the popular tweets (which have >20k
+                            retweet counts) have negative sentiment; tweets that were published by most-followed Twitter
+                            users (who have 20k-50k followers) also have more than 80% of the negative sentiment. This
+                            indicates that celebrities tend to favour the bad news in this pandemic; in the meantime,
+                            the bad news is more likely to draw people’s attention. Furthermore, accounts that were
+                            created the earliest (2006) or had issued the least tweets (<5000) are inclined to express
+                                more positively than other users. </p>
+                                <p class="barContent">
+                                    However, in contrast to our hypothesis, whether a username contains emoji or the
+                                     locations of the users (New York vs California vs Other) does not appear to influence the sentiment scores.
+                                </p>
+                    </section>
+                    <hr>
+                    <!-- end section -->
+
+                    <section id="line6" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Discussions<a></a></h2>
+                            </div>
+                        </div>
+                        <p class="barContent">
+                                    - By supplying our model with tweet text coded by ourselves, the model generally
+                                    produces
+                                    reasonable sentiment prediction results. That being said, there is still room for
+                                    improvement.
+                                    In particular, the model is not robust when it encounters very short text input.
+                                    More deep
+                                    learning tricks can be used to boost the performance, such as slanted triangular
+                                    learning rates.
+                                </p>
+                                <p class="barContent">
+                                    - Due to the query limits of Twitter API, we could only access a relatively small
+                                    amount of COVID-19 related tweets in our study. By choosing a subsample of tweets
+                                    from each date, we hoped to get samples that represent the population well. However,
+                                    samples are ultimately not the population. Our training data is also not enough due
+                                    to the time limitation of this challenge. If more tweets can be hydrated and RoBERTa
+                                    can be fine-tuned on a vast amount of tweet data, we expect this task to get much
+                                    higher accuracy.
+                                </p>
+                                <p class="barContent">
+                                    - In light of COVID-19, there are countless new stories happening each day, with
+                                    generally more negative than positive news reported. In fact, a hodgepodge of
+                                    positive and negative events can all together affect people’s expression. Therefore,
+                                    instead of matching the trends of sentiment scores with breaking news, it might be
+                                    more valuable to extract the news that people are actually discussing.
+
+                                </p>
+
+                    </section>
+                    <hr>
+
+
+                    <section id="line7" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">References <a></a></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                        <p>
+                            [1] Duong, Viet & Pham, Phu & Yang, Tongyu & Wang, Yu & Luo, Jiebo. (2020). The Ivory Tower
+                            Lost: How College Students Respond Differently than the General Public to the COVID-19
+                            Pandemic.
+                        </p>
+                        <p>
+                            [2] Liu, Yinhan & Ott, Myle & Goyal, Naman & Du, Jingfei & Joshi, Mandar & Chen, Danqi &
+                            Levy,
+                            Omer & Lewis, Mike & Zettlemoyer, Luke & Stoyanov, Veselin. (2019). RoBERTa: A Robustly
+                            Optimized BERT Pretraining Approach.
+                        </p>
+                        <p>
+                            [3] Devlin, Jacob & Chang, Ming-Wei & Lee, Kenton & Toutanova, Kristina. (2018). BERT:
+                            Pre-training of Deep Bidirectional Transformers for Language Understanding.
+                        </p>
+                        <p>
+                            [4] This site was based on <a
+                                href="http://surjithctly.github.io/documentation-html-template/">Documentation
+                                HTML Template. </a><br>
+                        </p>
+
+                        <h4>Data Source</h4>
+                        <div class="dataIntro">
+                            <ul>
+                                <li>Our training data by sentiment comes from the dataset used for SemEval-2017 Task 4
+                                    “Sentiment Analysis in Twitter”
+                                </li>
+                                <li><strong>Author : </strong>Baziotis, Christos and Pelekis, Nikos and Doulkeridis,
+                                    Christos
+                                </li>
+                                <li><strong>Title : </strong>DataStories at SemEval-2017 Task 4: Deep LSTM with
+                                    Attention
+                                    for Message-level and Topic-based Sentiment Analysis
+                                </li>
+                                <li>Dataset can be accessed <a
+                                        href="https://github.com/cbaziotis/datastories-semeval2017-task4">here</a></li>
+                            </ul>
+                        </div>
+                        <div class="dataIntro">
+                            <ul>
+                                <li>Covid-19 Twitter chatter dataset for scientific
+                                    use</a></li>
+                                <li><strong>Author : </strong>Georgia State University's Panacea Lab, Guanyu Wang,
+                                    Jingyuan
+                                    Yu, Tuo Liu, Yuning Ding, Elena Tutubalina
+                                </li>
+                                <li><strong>Version : </strong>12.0</li>
+                                <li>Dataset can be accessed <a href="http://www.panacealab.org/covid19/">here</a></li>
+                            </ul>
+                        </div>
+                        <div class="dataIntro">
+                            <ul>
+                                <li>Coronavirus timeline: Tracking the critical moments of COVID-19</a></li>
+                                <li><strong>Author: </strong> NBC News
+                                </li>
+                                <li>Dataset can be accessed <a
+                                        href="https://www.nbcnews.com/health/health-news/coronavirus-timeline-tracking-critical-moments-covid-19-n1154341">here</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end col -->
+                        <!-- end row -->
+                    </section>
+                    <hr>
+                    <!-- end section -->
+                    <hr class="bar">
+                    <!-- end section -->
+                    <section id="line8" class="section">
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Authors <a></a></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                        <p>
+                            Built with &#x2764; by
+                            <a href="https://yuchenwyc.github.io/">Yuchen Wang</a>,
+                            <a href="http://www.tingfengx.com/">Tingfeng Xia</a>,
+                            <a href="http://github.com/koichishi/">Gongyi Shi</a>, and
+                            <a href="http://github.com/ZoraDing212/">Chen Ding</a> &nbsp; <a
+                                href="https://github.com/tingfengx/Team-ZeroLoss">(Team ZeroLoss)</a>
+                        </p>
+
+                    </section>
+                    <hr>
+                    <!-- end section -->
+
+
+                </div>
+                <!-- // end .col -->
+
+            </div>
+            <!-- // end .row -->
+
+
+        </div>
+        <!-- // end container -->
+
+    </div>
+    <!-- end wrapper -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/retina.js"></script>
+    <script src="js/jquery.fitvids.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+
+    <!-- CUSTOM PLUGINS -->
+    <script src="js/custom.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="js/syntax-highlighter/scripts/shCore.js"></script>
+    <script src="js/syntax-highlighter/scripts/shBrushXml.js"></script>
+    <script src="js/syntax-highlighter/scripts/shBrushCss.js"></script>
+    <script src="js/syntax-highlighter/scripts/shBrushJScript.js"></script>
+
+</body>
+
+</html>
